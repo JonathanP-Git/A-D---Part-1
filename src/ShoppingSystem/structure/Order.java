@@ -17,16 +17,88 @@ public class Order {
     ArrayList<Payment> payments;
     ArrayList<LineItem> lineItems;
 
-    public Order(String number, Date ordered, Date shipped, Address shippedTo, OrderStatus status, float total,
+    public Order(String number, Date ordered,Address shippedTo, OrderStatus status,
                  Account account) {
         this.number = number;
         this.ordered = ordered;
-        this.shipped = shipped;
+        this.shipped = null;
         this.shippedTo = shippedTo;
         this.status = status;
-        this.total = total;
+        this.total = 0;
         this.account = account;
         this.payments = new ArrayList<>();
         this.lineItems = new ArrayList<>();
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public Date getOrdered() {
+        return ordered;
+    }
+
+    public void setOrdered(Date ordered) {
+        this.ordered = ordered;
+    }
+
+    public Date getShipped() {
+        return shipped;
+    }
+
+    public void setShipped(Date shipped) {
+        this.shipped = shipped;
+    }
+
+    public Address getShippedTo() {
+        return shippedTo;
+    }
+
+    public void setShippedTo(Address shippedTo) {
+        this.shippedTo = shippedTo;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public ArrayList<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(ArrayList<Payment> payments) {
+        this.payments = payments;
+    }
+
+    public ArrayList<LineItem> getLineItems() {
+        return lineItems;
+    }
+
+    public void setLineItems(ArrayList<LineItem> lineItems) {
+        this.lineItems = lineItems;
     }
 }
