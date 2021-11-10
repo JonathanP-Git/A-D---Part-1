@@ -186,27 +186,23 @@ public class ShoppingSystem {
         this.currentUser.getCustomer().getAccount().addPayment(payment);
 
     }
-    /*
+
     public void displayOrder() {
         if (currentUser == null) {
             System.out.println("No user is logged in.");
             return;
         }
-        int highest = 0;
-        for (int counter = 0; counter < currentUser.getCustomer().getAccount().getOrders().size(); counter++) {
-            if (Integer.parseInt(currentUser.getCustomer().getAccount().getOrders().get(counter).getNumber()) > highest) {
-                highest = Integer.parseInt(currentUser.getCustomer().getAccount().getOrders().get(counter).getNumber());
-            }
-        }
-        Order order = this.orders.get(highest);
-        System.out.println("Order number: " + highest);
-        System.out.println("Order date: " + order.get);
+
+        ArrayList<Order> currAccOrders = this.currentUser.getCustomer().getAccount().getOrders();
+        Order order = currAccOrders.get(currAccOrders.size()-1);
+        System.out.println("Order number: " + order.getNumber());
+        System.out.println("Order date: " + order.getOrdered());
         System.out.println("Shipping date: " + order.getShipped().toString());
-        System.out.println("Shipping address: " + order.get);
+        System.out.println("Shipping address: " + order.getShippedTo());
         System.out.println("Order status: " + order.getStatus().toString());
         System.out.println("Total payment " + order.getTotal());
     }
-    */
+
 
     public void linkProduct() {
 
