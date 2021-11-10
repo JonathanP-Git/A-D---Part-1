@@ -38,9 +38,11 @@ public class Main {
                 shoppingSystem.createNewOrder(line);
             }else if (line.toLowerCase().startsWith("add product to order")) {
                 shoppingSystem.addProductToOrder(line);
-            } else if (line.toLowerCase().contains("add user")) {
-                System.out.println("hi");
-                String[] list = line.split(" ");
+            } else if (line.toLowerCase().startsWith("display order")) {
+                shoppingSystem.displayOrder();
+            }
+            else if (line.toLowerCase().startsWith("link product")) {
+                shoppingSystem.linkProduct(line);
             }
         }
         in.close();

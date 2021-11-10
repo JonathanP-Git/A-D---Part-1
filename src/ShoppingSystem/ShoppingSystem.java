@@ -204,7 +204,7 @@ public class ShoppingSystem {
     }
 
 
-    public void linkProduct() {
+    public void linkProduct(String line) {
 
     }
 
