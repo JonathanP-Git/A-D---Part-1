@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
+    static int orderNumberCounter = 1;
     String number;
     Date ordered;
     Date shipped;
@@ -17,9 +18,9 @@ public class Order {
     ArrayList<Payment> payments;
     ArrayList<LineItem> lineItems;
 
-    public Order(String number, Date ordered,Address shippedTo, OrderStatus status,
+    public Order( Date ordered,Address shippedTo, OrderStatus status,
                  Account account) {
-        this.number = number;
+        this.number = String.valueOf(orderNumberCounter++);
         this.ordered = ordered;
         this.shipped = null;
         this.shippedTo = shippedTo;
@@ -100,5 +101,18 @@ public class Order {
 
     public void setLineItems(ArrayList<LineItem> lineItems) {
         this.lineItems = lineItems;
+    }
+
+    public boolean addLineItem(Product sellerProduct, int userQuantity, User currUser) {
+        if(sellerProduct.quantity < userQuantity){
+            System.out.println("The seller do not have such number of "+sellerProduct.name);
+            return false;
+        }
+
+        // decrease quantity in seller
+        sellerProduct.setQuantity(sellerProduct.getQuantity()-userQuantity);
+
+        this.lineItems.add(new LineItem(userQuantity,sellerProduct.getPrice(),currUser.getShoppingCart(),this,sellerProduct));
+        return true;
     }
 }

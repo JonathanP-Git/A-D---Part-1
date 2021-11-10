@@ -3,6 +3,7 @@ package ShoppingSystem.structure;
 import java.util.Date;
 
 public abstract class Payment {
+    static int paymentNumberCounter = 1;
     String id;
     Date paid;
     float total;
@@ -10,8 +11,8 @@ public abstract class Payment {
     Account account;
     Order order;
 
-    public Payment(String id, Date paid, float total, String details, Account account, Order order) {
-        this.id = id;
+    public Payment(Date paid, float total, String details, Account account, Order order) {
+        this.id = String.valueOf(paymentNumberCounter++);
         this.paid = paid;
         this.total = total;
         this.details = details;

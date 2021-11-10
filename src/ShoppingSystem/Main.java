@@ -36,6 +36,8 @@ public class Main {
                 shoppingSystem.logout(line);
             } else if (line.toLowerCase().startsWith("create new order")) {
                 shoppingSystem.createNewOrder(line);
+            }else if (line.toLowerCase().startsWith("add product to order")) {
+                shoppingSystem.addProductToOrder(line);
             } else if (line.toLowerCase().contains("add user")) {
                 System.out.println("hi");
                 String[] list = line.split(" ");

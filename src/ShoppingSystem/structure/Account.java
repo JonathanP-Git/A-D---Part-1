@@ -107,5 +107,7 @@ public class Account {
     public void setShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
+
+    public void addPayment(Payment p){this.payments.add(p);}
 }
 
