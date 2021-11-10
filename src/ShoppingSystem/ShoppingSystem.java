@@ -8,10 +8,11 @@ import java.util.*;
 
 public class ShoppingSystem {
     HashMap<String, User> users = new HashMap();
-    HashMap<String, PremiumAccount> premiumAcc = new HashMap();
+    HashMap<String, PremiumAccount> premiumAccounts = new HashMap();
     HashMap<String, Account> accounts = new HashMap();
     HashMap<String, Customer> customers = new HashMap();
     HashMap<String, Order> orders = new HashMap();
+    HashMap<String, Product> products = new HashMap();
     User currentUser = null;
 
     public void addUser(String line) {
@@ -45,13 +46,13 @@ public class ShoppingSystem {
         User user = new User(user_id, user_password, UserState.New, customer);
         ShoppingCart shoppingCart = new ShoppingCart(new Date(), user);
         Account account;
-        if(!premium) {
+        if (!premium) {
             account = new Account(account_id, account_billing_address, customer, shoppingCart);
-        }else{
+        } else {
             account = new PremiumAccount(account_id, account_billing_address, customer, shoppingCart);
-            premiumAcc.put(account_id, (PremiumAccount) account);
+            premiumAccounts.put(account_id, (PremiumAccount) account);
         }
-            //
+        //
         shoppingCart.setAccount(account);
         user.setShoppingCart(shoppingCart);
         customer.setAccount(account);
@@ -102,8 +103,7 @@ public class ShoppingSystem {
         String user_id = list[2];
         if (currentUser.getId().equals(user_id)) {
             currentUser = null;
-        }
-        else{
+        } else {
             System.out.println("User " + user_id + "is not existed");
         }
     }
@@ -115,9 +115,10 @@ public class ShoppingSystem {
             System.out.println("No user is logged in.");
             return;
         }
-        Order order = new Order(new Date(),new Address(address), OrderStatus.New,this.currentUser.getCustomer().getAccount());
-        this.orders.put(order.getNumber(),order);
-        System.out.println("The order's number is " +order.getNumber());
+        Order order = new Order(new Date(), new Address(address), OrderStatus.New,
+                this.currentUser.getCustomer().getAccount());
+        this.orders.put(order.getNumber(), order);
+        System.out.println("The order's number is " + order.getNumber());
     }
 
     public void addProductToOrder(String line) {
@@ -135,15 +136,15 @@ public class ShoppingSystem {
         User userToBuy = this.users.get(user_from_id);
 
         // check if user account is premium account
-        PremiumAccount userAcc = premiumAcc.getOrDefault(userToBuy.getCustomer().getAccount().getId(),null);
-        if(userAcc == null){
+        PremiumAccount userAcc = premiumAccounts.getOrDefault(userToBuy.getCustomer().getAccount().getId(), null);
+        if (userAcc == null) {
             System.out.println("User not has premium account!");
             return;
         }
 
 
-        Product premiumAccProduct = userAcc.getProduct(product_name);
-        if (premiumAccProduct == null){
+        ProductOfPremium premiumAccProduct = userAcc.getProduct(product_name);
+        if (premiumAccProduct == null) {
             System.out.println("Product not exists in this premium account!");
             return;
         }
@@ -152,11 +153,14 @@ public class ShoppingSystem {
 
         // ask user for quantity
         Scanner Scanner = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("How many "+product_name+" do you want to buy?");
+        System.out.println("How many " + product_name + " do you want to buy?");
         String userQuantity = Scanner.nextLine();
 
-        boolean addedLineItem =  order.addLineItem(premiumAccProduct,Integer.parseInt(userQuantity),this.currentUser);
-        if(!addedLineItem){return;}
+        boolean addedLineItem = order.addLineItem(premiumAccProduct, Integer.parseInt(userQuantity),
+                this.currentUser);
+        if (!addedLineItem) {
+            return;
+        }
 
         System.out.println("How do you want to pay? (Immediate/Delayed)");
         String userPayment = Scanner.nextLine().toLowerCase();
@@ -169,20 +173,25 @@ public class ShoppingSystem {
             case "immediate" -> {
                 System.out.println("Is that your phone number? " + this.currentUser.getCustomer().getPhone() + " y/n");
                 String userPhoneConfirmation = Scanner.nextLine().toLowerCase();
-                payment = new ImmediatePayment(new Date(), Integer.parseInt(userQuantity) * premiumAccProduct.getPrice(),
-                        userDetails, this.currentUser.getCustomer().getAccount(), order, userPhoneConfirmation.equalsIgnoreCase("y"));
+                payment = new ImmediatePayment(new Date(),
+                        Integer.parseInt(userQuantity) * premiumAccProduct.getPrice(),
+                        userDetails, this.currentUser.getCustomer().getAccount(), order,
+                        userPhoneConfirmation.equalsIgnoreCase("y"));
             }
             case "delayed" -> {
                 System.out.println("Please enter the date of your future payment. dd/mm/yyyy");
                 String[] userPaymentDate = Scanner.nextLine().split("/");
-                Date paymentDate = new Date(Integer.parseInt(userPaymentDate[2]), Integer.parseInt(userPaymentDate[1]), Integer.parseInt(userPaymentDate[0]));
+                Date paymentDate = new Date(Integer.parseInt(userPaymentDate[2]),
+                        Integer.parseInt(userPaymentDate[1]), Integer.parseInt(userPaymentDate[0]));
                 payment = new DelayedPayment(new Date(), Integer.parseInt(userQuantity) * premiumAccProduct.getPrice(),
                         userDetails, this.currentUser.getCustomer().getAccount(), order, paymentDate);
             }
             default -> System.out.println("Payment method not recognized! Please try again.");
         }
 
-        if(payment == null){return;}
+        if (payment == null) {
+            return;
+        }
         this.currentUser.getCustomer().getAccount().addPayment(payment);
 
     }
@@ -194,7 +203,7 @@ public class ShoppingSystem {
         }
 
         ArrayList<Order> currAccOrders = this.currentUser.getCustomer().getAccount().getOrders();
-        Order order = currAccOrders.get(currAccOrders.size()-1);
+        Order order = currAccOrders.get(currAccOrders.size() - 1);
         System.out.println("Order number: " + order.getNumber());
         System.out.println("Order date: " + order.getOrdered());
         System.out.println("Shipping date: " + order.getShipped().toString());
@@ -205,6 +214,21 @@ public class ShoppingSystem {
 
 
     public void linkProduct(String line) {
+        String[] list = line.split(" ");
+        String product_name = list[3];
+        String price = list[4];
+        String quantity = list[5];
+        if (currentUser == null || !(premiumAccounts.containsKey(currentUser.getId()))) {
+            System.out.println("No user is logged in.");
+            return;
+        }
+        if (!(products.containsKey(product_name))) {
+            System.out.println("The product is not available in the system.");
+            return;
+        }
+        Product product = products.get(product_name);
+        ((PremiumAccount)currentUser.getCustomer().getAccount()).addProduct(product,Integer.parseInt(price),Integer.parseInt(quantity));
+        System.out.println("The product has been linked");
 
     }
 

@@ -103,16 +103,16 @@ public class Order {
         this.lineItems = lineItems;
     }
 
-    public boolean addLineItem(Product sellerProduct, int userQuantity, User currUser) {
-        if(sellerProduct.quantity < userQuantity){
-            System.out.println("The seller do not have such number of "+sellerProduct.name);
+    public boolean addLineItem(ProductOfPremium sellerProduct, int userQuantity, User currUser) {
+        if(sellerProduct.getQuantity() < userQuantity){
+            System.out.println("The seller do not have such number of "+sellerProduct.getProduct().name);
             return false;
         }
 
         // decrease quantity in seller
         sellerProduct.setQuantity(sellerProduct.getQuantity()-userQuantity);
 
-        this.lineItems.add(new LineItem(userQuantity,sellerProduct.getPrice(),currUser.getShoppingCart(),this,sellerProduct));
+        this.lineItems.add(new LineItem(userQuantity,sellerProduct.getPrice(),currUser.getShoppingCart(),this,sellerProduct.getProduct()));
         return true;
     }
 }
