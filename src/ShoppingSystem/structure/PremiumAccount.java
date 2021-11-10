@@ -35,7 +35,8 @@ public class PremiumAccount extends Account {
             products.add(productOfPremium.getProduct());
         }
         if(products.contains(p)){return false;}
-        this.products_quantity_price.add(new ProductOfPremium(p,quantity,price,this));
+        this.products_quantity_price.add(new ProductOfPremium(p,quantity,price,this)); // TODO: need to check if needed also premiumAccount here?
+        p.setPremiumAccount(this);
         return true;
     }
 

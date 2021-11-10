@@ -11,21 +11,22 @@ public class Product {
 
 
 
-    public Product(String id, String name, ArrayList<LineItem> lineItems, Supplier supplier,
+    public Product(String id, String name, Supplier supplier,
                    PremiumAccount premiumAccount) {
         this.id = id;
         this.name = name;
-        this.lineItems = lineItems;
+        this.lineItems = new ArrayList<>();
         this.supplier = supplier;
         this.premiumAccount = premiumAccount;
 
     }
 
-    public Product(String id, String name, ArrayList<LineItem> lineItems, Supplier supplier) {
+    public Product(String id, String name, Supplier supplier) {
         this.id = id;
         this.name = name;
-        this.lineItems = lineItems;
+        this.lineItems = new ArrayList<>();
         this.supplier = supplier;
+        this.premiumAccount = null;
 
     }
 
