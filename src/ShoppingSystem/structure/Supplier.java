@@ -12,4 +12,32 @@ public class Supplier {
         this.name = name;
         this.products = new ArrayList<>();
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
+    }
+
+    public void removeProduct(Product product) {
+        this.products.remove(product);
+    }
 }

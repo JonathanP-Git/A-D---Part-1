@@ -13,11 +13,7 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) {
         ShoppingSystem shoppingSystem = new ShoppingSystem();
-
         loadDataToSystem(shoppingSystem);
-
-
-
         processArguments(args);
         try {
             processInput(shoppingSystem,System.in);
@@ -45,6 +41,20 @@ public class Main {
         PremiumAccount danaAccount = new PremiumAccount("Dana","Beer-Sheva",daniCustomer,shoppingCart2);
         danaAccount.addProduct(bamba,20,3);
 
+        ss.users.put(dani.getId(),dani);
+        ss.users.put(dana.getId(),dana);
+        //
+        ss.suppliers.put(osem.getId(),osem);
+        ss.suppliers.put(eastWest.getId(),eastWest);
+        //
+        ss.products.put(bamba.getId(),bamba);
+        ss.products.put(ramen.getId(),ramen);
+        //
+        ss.customers.put(daniCustomer.getId(),daniCustomer);
+        ss.customers.put(danaCustomer.getId(),danaCustomer);
+        //
+        ss.accounts.put(daniAccount.getId(),daniAccount);
+        ss.accounts.put(danaAccount.getId(),danaAccount);
 
     }
 
@@ -74,6 +84,15 @@ public class Main {
             }
             else if (line.toLowerCase().startsWith("link product")) {
                 shoppingSystem.linkProduct(line);
+            }
+            else if (line.toLowerCase().startsWith("add product")) {
+                shoppingSystem.addProduct(line);
+            }
+            else if (line.toLowerCase().startsWith("delete product")) {
+                shoppingSystem.deleteProduct(line);
+            }
+            else if (line.toLowerCase().startsWith("showallobjects")) {
+                shoppingSystem.showAllObjects();
             }
         }
         in.close();

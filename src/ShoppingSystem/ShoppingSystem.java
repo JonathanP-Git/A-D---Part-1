@@ -13,6 +13,7 @@ public class ShoppingSystem {
     HashMap<String, Customer> customers = new HashMap();
     HashMap<String, Order> orders = new HashMap();
     HashMap<String, Product> products = new HashMap();
+    HashMap<String, Supplier> suppliers = new HashMap();
     User currentUser = null;
 
     public void addUser(String line) {
@@ -232,18 +233,58 @@ public class ShoppingSystem {
 
     }
 
-    public void addProduct() {
-
+    public void addProduct(String line) {
+        String[] list = line.split(" ");
+        String product_name = list[3];
+        String supplier_name = list[4];
+        if (this.suppliers.containsKey(supplier_name)){
+            Product product = new Product(product_name,product_name, this.suppliers.get(supplier_name));
+            this.products.put(product_name,product);
+        }
+        else {
+            Supplier supplier = new Supplier(supplier_name, supplier_name);
+            this.suppliers.put(supplier.getId(), supplier);
+            Product product = new Product(product_name, product_name, supplier);
+            this.products.put(product_name, product);
+        }
     }
 
-    public void deleteProduct() {
-
+    public void deleteProduct(String line) {
+        String[] list = line.split(" ");
+        String product_name = list[3];
+        if (this.products.containsKey(product_name)){
+            this.products.get(product_name).deleteProductFromSupplier();
+            this.products.remove(product_name);
+        }
+        else{
+            System.out.println("The product is not available in the system.");
+        }
     }
 
     public void showAllObjects() {
-        System.out.println(users);
-        System.out.println(accounts);
-
+        System.out.println("System summery:");
+        //
+        System.out.println("Users:");
+        System.out.println(this.users.toString());
+        //
+        System.out.println("Premium Accounts:");
+        System.out.println(this.premiumAccounts.toString());
+        //
+        System.out.println("Accounts:");
+        System.out.println(this.accounts.toString());
+        //
+        System.out.println("Customers:");
+        System.out.println(this.customers.toString());
+        //
+        System.out.println("Orders:");
+        System.out.println(this.orders.toString());
+        //
+        System.out.println("Products:");
+        System.out.println(this.products.toString());
+        //
+        System.out.println("Suppliers:");
+        System.out.println(this.suppliers.toString());
+        //
     }
 
     public void showObject() {

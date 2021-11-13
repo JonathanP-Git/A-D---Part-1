@@ -26,8 +26,45 @@ public class Product {
         this.name = name;
         this.lineItems = new ArrayList<>();
         this.supplier = supplier;
+        this.supplier.products.add(this);
         this.premiumAccount = null;
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<LineItem> getLineItems() {
+        return lineItems;
+    }
+
+    public void setLineItems(ArrayList<LineItem> lineItems) {
+        this.lineItems = lineItems;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public PremiumAccount getPremiumAccount() {
+        return premiumAccount;
     }
 
     public void setPremiumAccount(PremiumAccount premiumAccount) {
@@ -37,5 +74,9 @@ public class Product {
         else{
             System.out.println("This product already has premium account");
         }
+    }
+
+    public void deleteProductFromSupplier(){
+       this.supplier.removeProduct(this);
     }
 }
