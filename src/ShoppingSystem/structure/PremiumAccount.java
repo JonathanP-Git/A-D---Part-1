@@ -29,22 +29,24 @@ public class PremiumAccount extends Account {
         return products;
     }
 
-    public boolean addProduct(Product p, int quantity, int price){
+    public boolean addProduct(Product p, int quantity, int price) {
         ArrayList<Product> products = new ArrayList<>();
         for (ProductOfPremium productOfPremium : this.products_quantity_price) {
             products.add(productOfPremium.getProduct());
         }
-        if(products.contains(p)){return false;}
-        this.products_quantity_price.add(new ProductOfPremium(p,quantity,price,this)); // TODO: need to check if needed also premiumAccount here?
+        if (products.contains(p)) {
+            return false;
+        }
+        this.products_quantity_price.add(new ProductOfPremium(p, quantity, price, this)); // TODO: need to check if
+        // needed also premiumAccount here?
         p.setPremiumAccount(this);
         return true;
     }
 
 
     public ProductOfPremium getProduct(String product_name) {
-        for (ProductOfPremium productOfPremium : this.products_quantity_price)
-        {
-            if(productOfPremium.getProduct().name.equals(product_name)){
+        for (ProductOfPremium productOfPremium : this.products_quantity_price) {
+            if (productOfPremium.getProduct().name.equals(product_name)) {
                 return productOfPremium;
             }
         }

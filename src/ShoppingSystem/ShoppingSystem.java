@@ -15,7 +15,7 @@ public class ShoppingSystem {
     HashMap<String, Product> products = new HashMap();
     HashMap<String, Supplier> suppliers = new HashMap();
     User currentUser = null;
-    HashMap<String, Object>  allObj = new HashMap<>();
+    HashMap<String, Object> allObj = new HashMap<>();
 
     public void addUser(String line) {
         Scanner scanner = new Scanner(System.in);
@@ -229,7 +229,8 @@ public class ShoppingSystem {
             return;
         }
         Product product = products.get(product_name);
-        ((PremiumAccount)currentUser.getCustomer().getAccount()).addProduct(product,Integer.parseInt(price),Integer.parseInt(quantity));
+        ((PremiumAccount) currentUser.getCustomer().getAccount()).addProduct(product, Integer.parseInt(price),
+                Integer.parseInt(quantity));
         System.out.println("The product has been linked");
 
     }
@@ -238,11 +239,10 @@ public class ShoppingSystem {
         String[] list = line.split(" ");
         String product_name = list[3];
         String supplier_name = list[4];
-        if (this.suppliers.containsKey(supplier_name)){
-            Product product = new Product(product_name,product_name, this.suppliers.get(supplier_name));
-            this.products.put(product_name,product);
-        }
-        else {
+        if (this.suppliers.containsKey(supplier_name)) {
+            Product product = new Product(product_name, product_name, this.suppliers.get(supplier_name));
+            this.products.put(product_name, product);
+        } else {
             Supplier supplier = new Supplier(supplier_name, supplier_name);
             this.suppliers.put(supplier.getId(), supplier);
             Product product = new Product(product_name, product_name, supplier);
@@ -253,11 +253,10 @@ public class ShoppingSystem {
     public void deleteProduct(String line) {
         String[] list = line.split(" ");
         String product_name = list[3];
-        if (this.products.containsKey(product_name)){
+        if (this.products.containsKey(product_name)) {
             this.products.get(product_name).deleteProductFromSupplier();
             this.products.remove(product_name);
-        }
-        else{
+        } else {
             System.out.println("The product is not available in the system.");
         }
     }
