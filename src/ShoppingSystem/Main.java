@@ -71,7 +71,7 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String line;
         System.out.println("Welcome the 'Shopping System Pro 3000'");
-        System.out.println("--------------------------------------------------------");
+        System.out.println("---------------------------------");
         callMenu();
         while (!(line = reader.readLine()).equals("exit")) {
             if (line.toLowerCase().startsWith("add user")) {
@@ -112,7 +112,6 @@ public class Main {
     }
 
     private static void callMenu() {
-        System.out.println("\uD83D\uDED2                " + "\uD83D\uDED2                " + "\uD83D\uDED2                " + "\uD83D\uDED2                ");
         System.out.println("In order interact with the system write one of the options below:");
         System.out.println("1. Add user {login_id}");
         System.out.println("2. Remove user {login_id}");
