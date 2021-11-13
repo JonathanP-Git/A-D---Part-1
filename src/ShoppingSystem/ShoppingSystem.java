@@ -252,7 +252,7 @@ public class ShoppingSystem {
 
     public void deleteProduct(String line) {
         String[] list = line.split(" ");
-        String product_name = list[3];
+        String product_name = list[2];
         if (this.products.containsKey(product_name)) {
             this.products.get(product_name).deleteProductFromSupplier();
             this.products.remove(product_name);
@@ -290,8 +290,42 @@ public class ShoppingSystem {
 
     public void showObjectId(String line) {
         String id = line.split(" ")[3];
-        Object toPrint = this.allObj.get(id);
-        System.out.println(toPrint.toString());
+        /*HashMap<String, User> users = new HashMap();
+        HashMap<String, PremiumAccount> premiumAccounts = new HashMap();
+        HashMap<String, Account> accounts = new HashMap();
+        HashMap<String, Customer> customers = new HashMap();
+        HashMap<String, Order> orders = new HashMap();
+        HashMap<String, Product> products = new HashMap();
+        HashMap<String, Supplier> suppliers = new HashMap();
+
+         */
+        if(accounts.containsKey(id)){
+            Account toPrint = accounts.get(id);
+            System.out.println(toPrint);
+            System.out.println("Balance: "+toPrint.getBalance());
+            System.out.println("Billing Address: "+toPrint.getBilling_address());
+            System.out.println("Open Date: "+toPrint.getOpen());
+            System.out.println("Close Date: "+toPrint.getClosed());
+            System.out.println("Is Closed?: "+toPrint.getIs_closed());
+            System.out.println("Customer:" + toPrint.getCustomer());
+            System.out.println("Payments: ");
+            for(Payment p: toPrint.getPayments()){
+                System.out.println(p);
+            }
+            System.out.println("Orders: ");
+            for(Order o: toPrint.getOrders()){
+                System.out.println(o);
+            }
+            System.out.println(toPrint.getShoppingCart());
+
+        }
+        if(premiumAccounts.containsKey(id)) {
+            PremiumAccount pa = premiumAccounts.get(id);
+            for(Product pr: pa.getProducts()){
+                System.out.println(pr);
+            }
+        }
+
     }
 
 }

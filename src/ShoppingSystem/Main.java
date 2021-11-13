@@ -16,50 +16,50 @@ public class Main {
         loadDataToSystem(shoppingSystem);
         processArguments(args);
         try {
-            processInput(shoppingSystem, System.in);
+            processInput(shoppingSystem,System.in);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private static void loadDataToSystem(ShoppingSystem ss) {
-        Supplier osem = new Supplier("Osem", "Osem");
-        Supplier eastWest = new Supplier("EastWest", "EastWest");
-        Product bamba = new Product("Bamba", "Bamba", osem);
-        Product ramen = new Product("Ramen", "Ramen", eastWest);
+        Supplier osem = new Supplier("Osem","Osem");
+        Supplier eastWest = new Supplier("EastWest","EastWest");
+        Product bamba = new Product("Bamba","Bamba",osem);
+        Product ramen = new Product("Ramen","Ramen",eastWest);
 
         // dani regular account
-        Customer daniCustomer = new Customer("Dani", new Address("Tel-Aviv"), "123", "abc@gmail.com");
-        User dani = new User("Dani", "Dani123", UserState.New, daniCustomer);
+        Customer daniCustomer = new Customer("Dani",new Address("Tel-Aviv"),"123","abc@gmail.com");
+        User dani = new User("Dani","Dani123", UserState.New,daniCustomer);
         ShoppingCart shoppingCart = new ShoppingCart(new Date(), dani);
-        Account daniAccount = new Account("Dani", "Beer-Sheva", daniCustomer, shoppingCart);
+        Account daniAccount = new Account("Dani","Beer-Sheva",daniCustomer,shoppingCart);
 
         // Dana premium account
-        Customer danaCustomer = new Customer("Dana", new Address("Tel-Aviv"), "123", "abc@gmail.com");
-        User dana = new User("Dana", "Dana123", UserState.New, danaCustomer);
+        Customer danaCustomer = new Customer("Dana",new Address("Tel-Aviv"),"123","abc@gmail.com");
+        User dana = new User("Dana","Dana123", UserState.New,danaCustomer);
         ShoppingCart shoppingCart2 = new ShoppingCart(new Date(), dana);
-        PremiumAccount danaAccount = new PremiumAccount("Dana", "Beer-Sheva", daniCustomer, shoppingCart2);
-        danaAccount.addProduct(bamba, 20, 3);
+        PremiumAccount danaAccount = new PremiumAccount("Dana","Beer-Sheva",daniCustomer,shoppingCart2);
+        danaAccount.addProduct(bamba,20,3);
 
-        ss.users.put(dani.getId(), dani);
-        ss.users.put(dana.getId(), dana);
+        ss.users.put(dani.getId(),dani);
+        ss.users.put(dana.getId(),dana);
         //
-        ss.suppliers.put(osem.getId(), osem);
-        ss.suppliers.put(eastWest.getId(), eastWest);
+        ss.suppliers.put(osem.getId(),osem);
+        ss.suppliers.put(eastWest.getId(),eastWest);
         //
-        ss.products.put(bamba.getId(), bamba);
-        ss.products.put(ramen.getId(), ramen);
+        ss.products.put(bamba.getId(),bamba);
+        ss.products.put(ramen.getId(),ramen);
         //
-        ss.customers.put(daniCustomer.getId(), daniCustomer);
-        ss.customers.put(danaCustomer.getId(), danaCustomer);
+        ss.customers.put(daniCustomer.getId(),daniCustomer);
+        ss.customers.put(danaCustomer.getId(),danaCustomer);
         //
-        ss.accounts.put(daniAccount.getId(), daniAccount);
-        ss.accounts.put(danaAccount.getId(), danaAccount);
+        ss.accounts.put(daniAccount.getId(),daniAccount);
+        ss.accounts.put(danaAccount.getId(),danaAccount);
         //
-        ss.premiumAccounts.put(danaAccount.getId(), danaAccount);
+        ss.premiumAccounts.put(danaAccount.getId(),danaAccount);
 
-        ss.allObj.put(daniAccount.getId(), daniAccount);
-        ss.allObj.put(danaAccount.getId(), danaAccount);
+        ss.allObj.put(daniAccount.getId(),daniAccount);
+        ss.allObj.put(danaAccount.getId(),danaAccount);
 
     }
 
@@ -71,6 +71,7 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String line;
         System.out.println("Welcome the 'Shopping System Pro 3000'");
+        System.out.println("--------------------------------------");
         callMenu();
         while (!(line = reader.readLine()).equals("exit")) {
             if (line.toLowerCase().startsWith("add user")) {
@@ -83,24 +84,27 @@ public class Main {
                 shoppingSystem.logout(line);
             } else if (line.toLowerCase().startsWith("create new order")) {
                 shoppingSystem.createNewOrder(line);
-            } else if (line.toLowerCase().startsWith("add product to order")) {
+            }else if (line.toLowerCase().startsWith("add product to order")) {
                 shoppingSystem.addProductToOrder(line);
             } else if (line.toLowerCase().startsWith("display order")) {
                 shoppingSystem.displayOrder();
-            } else if (line.toLowerCase().startsWith("link product")) {
+            }
+            else if (line.toLowerCase().startsWith("link product")) {
                 shoppingSystem.linkProduct(line);
-            } else if (line.toLowerCase().startsWith("add product")) {
+            }
+            else if (line.toLowerCase().startsWith("add product")) {
                 shoppingSystem.addProduct(line);
-            } else if (line.toLowerCase().startsWith("delete product")) {
+            }
+            else if (line.toLowerCase().startsWith("delete product")) {
                 shoppingSystem.deleteProduct(line);
-            } else if (line.toLowerCase().startsWith("showallobjects") || line.toLowerCase().startsWith("show all " +
-                    "objects")) {
+            }
+            else if (line.toLowerCase().startsWith("showallobjects") || line.toLowerCase().startsWith("show all objects")) {
                 shoppingSystem.showAllObjects();
-            } else if (line.toLowerCase().startsWith("showobjectid") || line.toLowerCase().startsWith("show object " +
-                    "id")) {
+            }else if (line.toLowerCase().startsWith("showobjectid") || line.toLowerCase().startsWith("show object id")) {
                 shoppingSystem.showObjectId(line);
-            } else {
-                System.out.println("Wrong input, try again");
+            }
+            else{
+                System.out.println("Wrong input, try agian");
             }
             callMenu();
         }
@@ -108,7 +112,6 @@ public class Main {
     }
 
     private static void callMenu() {
-        System.out.println("----------------------------------------------------------");
         System.out.println("In order interact with the system write one of the options below:");
         System.out.println("1. Add user {login_id}");
         System.out.println("2. Remove user {login_id}");

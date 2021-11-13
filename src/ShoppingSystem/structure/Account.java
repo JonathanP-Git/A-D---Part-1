@@ -44,7 +44,7 @@ public class Account {
         this.billing_address = billing_address;
     }
 
-    public boolean isIs_closed() {
+    public boolean getIs_closed() {
         return is_closed;
     }
 
