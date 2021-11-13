@@ -57,6 +57,10 @@ public class Main {
         ss.accounts.put(danaAccount.getId(),danaAccount);
         //
         ss.premiumAccounts.put(danaAccount.getId(),danaAccount);
+
+        ss.allObj.put(daniAccount.getId(),daniAccount);
+        ss.allObj.put(danaAccount.getId(),danaAccount);
+
     }
 
     private static void processArguments(String[] args) {
@@ -94,6 +98,8 @@ public class Main {
             }
             else if (line.toLowerCase().startsWith("showallobjects")) {
                 shoppingSystem.showAllObjects();
+            }else if (line.toLowerCase().startsWith("showobjectid")) {
+                shoppingSystem.showObjectId(line);
             }
         }
         in.close();

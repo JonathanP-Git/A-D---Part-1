@@ -15,6 +15,7 @@ public class ShoppingSystem {
     HashMap<String, Product> products = new HashMap();
     HashMap<String, Supplier> suppliers = new HashMap();
     User currentUser = null;
+    HashMap<String, Object>  allObj = new HashMap<>();
 
     public void addUser(String line) {
         Scanner scanner = new Scanner(System.in);
@@ -288,7 +289,11 @@ public class ShoppingSystem {
         //
     }
 
-    public void showObject() {
+    public void showObjectId(String line) {
+        String id = line.split(" ")[1];
+        Object toPrint = this.allObj.get(id);
+        System.out.println(toPrint.toString());
+
 
     }
 
