@@ -290,52 +290,81 @@ public class ShoppingSystem {
 
     public void showObjectId(String line) {
         String id = line.split(" ")[3];
-        /*HashMap<String, User> users = new HashMap();
-        HashMap<String, PremiumAccount> premiumAccounts = new HashMap();
-        HashMap<String, Account> accounts = new HashMap();
-        HashMap<String, Customer> customers = new HashMap();
-        HashMap<String, Order> orders = new HashMap();
-        HashMap<String, Product> products = new HashMap();
-        HashMap<String, Supplier> suppliers = new HashMap();
 
-         */
-        if(accounts.containsKey(id)){
+        if (accounts.containsKey(id)) {
+            System.out.println("------ Account ------");
             Account toPrint = accounts.get(id);
             System.out.println(toPrint);
-            System.out.println("Balance: "+toPrint.getBalance());
-            System.out.println("Billing Address: "+toPrint.getBilling_address());
-            System.out.println("Open Date: "+toPrint.getOpen());
-            System.out.println("Close Date: "+toPrint.getClosed());
-            System.out.println("Is Closed?: "+toPrint.getIs_closed());
+            System.out.println("Balance: " + toPrint.getBalance());
+            System.out.println("Billing Address: " + toPrint.getBilling_address());
+            System.out.println("Open Date: " + toPrint.getOpen());
+            System.out.println("Close Date: " + toPrint.getClosed());
+            System.out.println("Is Closed?: " + toPrint.getIs_closed());
             System.out.println("Customer:" + toPrint.getCustomer());
             System.out.println("Payments: ");
-            for(Payment p: toPrint.getPayments()){
+            for (Payment p : toPrint.getPayments()) {
                 System.out.println(p);
             }
             System.out.println("Orders: ");
-            for(Order o: toPrint.getOrders()){
+            for (Order o : toPrint.getOrders()) {
                 System.out.println(o);
             }
             System.out.println(toPrint.getShoppingCart());
-            if(premiumAccounts.containsKey(id)) {
+            if (premiumAccounts.containsKey(id)) {
                 PremiumAccount pa = premiumAccounts.get(id);
-                for(Product pr: pa.getProducts()){
+                for (Product pr : pa.getProducts()) {
                     System.out.println(pr);
                 }
             }
-            return;
         }
-        if(customers.containsKey(id)){
+        if (customers.containsKey(id)) {
+            System.out.println("------ Customer ------");
             Customer toPrint = customers.get(id);
             System.out.println(toPrint);
-            System.out.println("Address: "+ toPrint.getAddress());
-            System.out.println("Phone: "+ toPrint.getPhone());
-            System.out.println("Email: "+ toPrint.getEmail());
-            System.out.println("Customer's User: "+ toPrint.getUser());
-            System.out.println("Customer's Account: "+ toPrint.getAccount());
+            System.out.println("Address: " + toPrint.getAddress());
+            System.out.println("Phone: " + toPrint.getPhone());
+            System.out.println("Email: " + toPrint.getEmail());
+            System.out.println("Customer's User: " + toPrint.getUser());
+            System.out.println("Customer's Account: " + toPrint.getAccount());
         }
 
+        if (users.containsKey(id)) {
+            System.out.println("------ User ------");
+            User toPrint = users.get(id);
+            System.out.println(toPrint);
+            System.out.println("Login id: " + toPrint.getId());
+            System.out.println("Password: " + "********");
+            System.out.println("State: " + toPrint.getState().toString());
+        }
 
+        if (premiumAccounts.containsKey(id)) {
+            System.out.println("------ Premium account ------");
+            PremiumAccount toPrint = premiumAccounts.get(id);
+            System.out.println(toPrint);
+            for (Product p : toPrint.getProducts()) {
+                System.out.println(p);
+            }
+        }
+
+        if (products.containsKey(id)) {
+            System.out.println("------ Product------");
+            Product toPrint = products.get(id);
+            System.out.println(toPrint);
+            System.out.println("ID: " + toPrint.getId());
+            System.out.println("Name: " + toPrint.getName());
+            System.out.println("Premium account: " + toPrint.getPremiumAccount().getId());
+        }
+
+        if (suppliers.containsKey(id)) {
+            System.out.println("------ Supplier------");
+            Supplier toPrint = suppliers.get(id);
+            System.out.println(toPrint);
+            System.out.println("ID: " + toPrint.getId());
+            System.out.println("Name: " + toPrint.getName());
+            for (Product p : toPrint.getProducts()) {
+                System.out.println(p);
+            }
+        }
     }
 
 }
