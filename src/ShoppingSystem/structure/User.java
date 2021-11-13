@@ -61,6 +61,13 @@ public class User {
         this.customer = customer;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                '}';
+    }
+
     public void setShoppingCart(ShoppingCart shoppingCart) {
         if (this.shoppingCart == null) {
             this.shoppingCart = shoppingCart;

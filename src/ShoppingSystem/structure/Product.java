@@ -79,4 +79,11 @@ public class Product {
     public void deleteProductFromSupplier(){
        this.supplier.removeProduct(this);
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                '}';
+    }
 }

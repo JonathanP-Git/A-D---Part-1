@@ -17,6 +17,13 @@ public class Supplier {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Supplier{" +
+                "id='" + id + '\'' +
+                '}';
+    }
+
     public void setId(String id) {
         this.id = id;
     }

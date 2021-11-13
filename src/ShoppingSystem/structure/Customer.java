@@ -75,4 +75,11 @@ public class Customer {
             System.out.println("This customer already has user.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id='" + id + '\'' +
+                '}';
+    }
 }

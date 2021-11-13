@@ -115,4 +115,11 @@ public class Order {
         this.lineItems.add(new LineItem(userQuantity,sellerProduct.getPrice(),currUser.getShoppingCart(),this,sellerProduct.getProduct()));
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "number='" + number + '\'' +
+                '}';
+    }
 }

@@ -55,7 +55,8 @@ public class Main {
         //
         ss.accounts.put(daniAccount.getId(),daniAccount);
         ss.accounts.put(danaAccount.getId(),danaAccount);
-
+        //
+        ss.premiumAccounts.put(danaAccount.getId(),danaAccount);
     }
 
     private static void processArguments(String[] args) {

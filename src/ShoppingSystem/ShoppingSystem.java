@@ -265,6 +265,7 @@ public class ShoppingSystem {
         System.out.println("System summery:");
         //
         System.out.println("Users:");
+
         System.out.println(this.users.toString());
         //
         System.out.println("Premium Accounts:");

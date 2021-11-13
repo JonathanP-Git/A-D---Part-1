@@ -19,4 +19,11 @@ public abstract class Payment {
         this.account = account;
         this.order = order;
     }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "id='" + id + '\'' +
+                '}';
+    }
 }

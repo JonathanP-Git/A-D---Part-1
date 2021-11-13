@@ -109,5 +109,12 @@ public class Account {
     }
 
     public void addPayment(Payment p){this.payments.add(p);}
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id='" + id + '\'' +
+                '}';
+    }
 }
 
