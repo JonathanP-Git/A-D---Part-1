@@ -317,14 +317,24 @@ public class ShoppingSystem {
                 System.out.println(o);
             }
             System.out.println(toPrint.getShoppingCart());
-
-        }
-        if(premiumAccounts.containsKey(id)) {
-            PremiumAccount pa = premiumAccounts.get(id);
-            for(Product pr: pa.getProducts()){
-                System.out.println(pr);
+            if(premiumAccounts.containsKey(id)) {
+                PremiumAccount pa = premiumAccounts.get(id);
+                for(Product pr: pa.getProducts()){
+                    System.out.println(pr);
+                }
             }
+            return;
         }
+        if(customers.containsKey(id)){
+            Customer toPrint = customers.get(id);
+            System.out.println(toPrint);
+            System.out.println("Address: "+ toPrint.getAddress());
+            System.out.println("Phone: "+ toPrint.getPhone());
+            System.out.println("Email: "+ toPrint.getEmail());
+            System.out.println("Customer's User: "+ toPrint.getUser());
+            System.out.println("Customer's Account: "+ toPrint.getAccount());
+        }
+
 
     }
 

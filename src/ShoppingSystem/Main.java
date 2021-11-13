@@ -38,7 +38,7 @@ public class Main {
         Customer danaCustomer = new Customer("Dana",new Address("Tel-Aviv"),"123","abc@gmail.com");
         User dana = new User("Dana","Dana123", UserState.New,danaCustomer);
         ShoppingCart shoppingCart2 = new ShoppingCart(new Date(), dana);
-        PremiumAccount danaAccount = new PremiumAccount("Dana","Beer-Sheva",daniCustomer,shoppingCart2);
+        PremiumAccount danaAccount = new PremiumAccount("Dana","Beer-Sheva",danaCustomer,shoppingCart2);
         danaAccount.addProduct(bamba,20,3);
 
         ss.users.put(dani.getId(),dani);
