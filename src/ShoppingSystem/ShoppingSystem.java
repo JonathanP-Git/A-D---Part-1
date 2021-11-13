@@ -61,7 +61,7 @@ public class ShoppingSystem {
         this.users.put(user.getId(), user);
         this.customers.put(customer.getId(), customer);
         this.accounts.put(account.getId(), account);
-        System.out.println("The user " + user_id + "has been added!");
+        System.out.println("The user " + user_id + " has been added!");
 
     }
 
@@ -290,11 +290,9 @@ public class ShoppingSystem {
     }
 
     public void showObjectId(String line) {
-        String id = line.split(" ")[1];
+        String id = line.split(" ")[3];
         Object toPrint = this.allObj.get(id);
         System.out.println(toPrint.toString());
-
-
     }
 
 }
