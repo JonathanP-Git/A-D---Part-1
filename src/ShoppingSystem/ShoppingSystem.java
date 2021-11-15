@@ -75,8 +75,9 @@ public class ShoppingSystem {
         }
         this.customers.remove(this.users.get(user_id).getCustomer().getId());
         this.accounts.remove(this.users.get(user_id).getCustomer().getAccount().getId());
+        this.premiumAccounts.remove(this.users.get(user_id).getCustomer().getAccount().getId());
         this.users.remove(user_id);
-        System.out.println("The user " + user_id + "has been deleted!");
+        System.out.println("The user " + user_id + " has been deleted!");
 
 
     }
@@ -368,5 +369,4 @@ public class ShoppingSystem {
             }
         }
     }
-
 }
