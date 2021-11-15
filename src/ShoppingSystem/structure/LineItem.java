@@ -1,6 +1,9 @@
 package ShoppingSystem.structure;
 
+import java.util.Objects;
+
 public class LineItem {
+    String id;
     int quantity;
     int price;
     ShoppingCart shoppingCart;
@@ -13,5 +16,20 @@ public class LineItem {
         this.shoppingCart = shoppingCart;
         this.order = order;
         this.product = product;
+        this.id = String.valueOf(this.hashCode()); // override this.id
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LineItem lineItem = (LineItem) o;
+        return quantity == lineItem.quantity && price == lineItem.price && Objects.equals(id, lineItem.id) && Objects.equals(shoppingCart, lineItem.shoppingCart) && Objects.equals(order, lineItem.order) && Objects.equals(product, lineItem.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(quantity, price, shoppingCart, order, product);
     }
 }

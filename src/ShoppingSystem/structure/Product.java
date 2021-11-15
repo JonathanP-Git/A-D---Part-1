@@ -11,15 +11,15 @@ public class Product {
 
 
 
-    public Product(String id, String name, Supplier supplier,
-                   PremiumAccount premiumAccount) {
-        this.id = id;
-        this.name = name;
-        this.lineItems = new ArrayList<>();
-        this.supplier = supplier;
-        this.premiumAccount = premiumAccount;
-
-    }
+//    public Product(String id, String name, Supplier supplier,
+//                   PremiumAccount premiumAccount) {
+//        this.id = id;
+//        this.name = name;
+//        this.lineItems = new ArrayList<>();
+//        this.supplier = supplier;
+//        this.premiumAccount = premiumAccount;
+//
+//    }
 
     public Product(String id, String name, Supplier supplier) {
         this.id = id;
@@ -28,7 +28,6 @@ public class Product {
         this.supplier = supplier;
         this.supplier.products.add(this);
         this.premiumAccount = null;
-
     }
 
     public String getId() {

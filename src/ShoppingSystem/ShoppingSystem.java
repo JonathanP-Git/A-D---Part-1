@@ -39,20 +39,20 @@ public class ShoppingSystem {
         String phone = scanner.nextLine();
         System.out.println("Enter Email");
         String email = scanner.nextLine();
-        System.out.println("Enter account id");
-        String account_id = scanner.nextLine();
+//        System.out.println("Enter account id");
+//        String account_id = scanner.nextLine();
         System.out.println("Enter billing address");
         String account_billing_address = scanner.nextLine();
         //
-        Customer customer = new Customer(customer_id, customer_address, phone, email);
+        Customer customer = new Customer(customer_id,customer_address, phone, email);
         User user = new User(user_id, user_password, UserState.New, customer);
         ShoppingCart shoppingCart = new ShoppingCart(new Date(), user);
         Account account;
         if (!premium) {
-            account = new Account(account_id, account_billing_address, customer, shoppingCart);
+            account = new Account(customer_id, account_billing_address, customer, shoppingCart);
         } else {
-            account = new PremiumAccount(account_id, account_billing_address, customer, shoppingCart);
-            premiumAccounts.put(account_id, (PremiumAccount) account);
+            account = new PremiumAccount(customer_id, account_billing_address, customer, shoppingCart);
+            premiumAccounts.put(account.getId(), (PremiumAccount) account);
         }
         //
         shoppingCart.setAccount(account);
@@ -92,7 +92,7 @@ public class ShoppingSystem {
         if (this.users.containsKey(user_id)) {
             if (this.users.get(user_id).getPassword().equals(password)) {
                 currentUser = this.users.get(user_id);
-                System.out.println("Dana has been logged in");
+                System.out.println(currentUser.getId()+" has been logged in");
             } else {
                 System.out.println("The password is incorrect");
             }
@@ -234,13 +234,12 @@ public class ShoppingSystem {
         ((PremiumAccount) currentUser.getCustomer().getAccount()).addProduct(product, Integer.parseInt(price),
                 Integer.parseInt(quantity));
         System.out.println("The product has been linked");
-
     }
 
     public void addProduct(String line) {
         String[] list = line.split(" ");
-        String product_name = list[3];
-        String supplier_name = list[4];
+        String product_name = list[2];
+        String supplier_name = list[3];
         if (this.suppliers.containsKey(supplier_name)) {
             Product product = new Product(product_name, product_name, this.suppliers.get(supplier_name));
             this.products.put(product_name, product);
@@ -354,7 +353,9 @@ public class ShoppingSystem {
             System.out.println(toPrint);
             System.out.println("ID: " + toPrint.getId());
             System.out.println("Name: " + toPrint.getName());
-            System.out.println("Premium account: " + toPrint.getPremiumAccount().getId());
+            if(toPrint.getPremiumAccount() != null) {
+                System.out.println("Premium account: " + toPrint.getPremiumAccount().getId());
+            }
         }
 
         if (suppliers.containsKey(id)) {

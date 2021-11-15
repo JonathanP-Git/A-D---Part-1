@@ -9,13 +9,13 @@ public class User {
     ShoppingCart shoppingCart;
     Customer customer;
 
-    public User(String id, String password, UserState state, ShoppingCart shoppingCart, Customer customer) {
-        this.id = id;
-        this.password = password;
-        this.state = state;
-        this.shoppingCart = shoppingCart;
-        this.customer = customer;
-    }
+//    public User(String id, String password, UserState state, ShoppingCart shoppingCart, Customer customer) {
+//        this.id = id;
+//        this.password = password;
+//        this.state = state;
+//        this.shoppingCart = shoppingCart;
+//        this.customer = customer;
+//    }
 
     public User(String id, String password, UserState state,Customer customer) {
         this.id = id;
@@ -23,6 +23,7 @@ public class User {
         this.state = state;
         this.shoppingCart = null;
         this.customer = customer;
+        customer.setUser(this);
     }
 
     public String getId() {
