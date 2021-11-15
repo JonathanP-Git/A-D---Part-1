@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class PremiumAccount extends Account {
     ArrayList<ProductOfPremium> products_quantity_price;
+    ArrayList<Product> products;
 
     public ArrayList<ProductOfPremium> getProducts_quantity_price() {
         return products_quantity_price;
@@ -19,6 +20,7 @@ public class PremiumAccount extends Account {
     public PremiumAccount(String id, String billing_address, Customer customer, ShoppingCart shoppingCart) {
         super(id, billing_address, customer, shoppingCart);
         this.products_quantity_price = new ArrayList<>();
+        this.products = new ArrayList<>();
     }
 
     public ArrayList<Product> getProducts() {
@@ -30,13 +32,11 @@ public class PremiumAccount extends Account {
     }
 
     public boolean addProduct(Product p, int quantity, int price) {
-        ArrayList<Product> products = new ArrayList<>();
-        for (ProductOfPremium productOfPremium : this.products_quantity_price) {
-            products.add(productOfPremium.getProduct());
-        }
         if (products.contains(p)) {
+            System.out.println("This Premium Account already has this product");
             return false;
         }
+        this.products.add(p);
         this.products_quantity_price.add(new ProductOfPremium(p, quantity, price, this)); // TODO: need to check if
         // needed also premiumAccount here?
         p.setPremiumAccount(this);
