@@ -174,7 +174,7 @@ public class ShoppingSystem {
         System.out.println("How do you want to pay? (Immediate/Delayed)");
         String userPayment = Scanner.nextLine().toLowerCase();
 
-        System.out.println("Please add information about the payment.");
+        System.out.println("Please add details about the payment.");
         String userDetails = Scanner.nextLine().toLowerCase();
 
         Payment payment = null;
