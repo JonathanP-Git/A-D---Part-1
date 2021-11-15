@@ -16,6 +16,7 @@ public class ShoppingSystem {
     HashMap<String, Supplier> suppliers = new HashMap();
     User currentUser = null;
     HashMap<String, Object> allObj = new HashMap<>();
+    static public int globalId = 0;
 
     public void addUser(String line) {
         Scanner scanner = new Scanner(System.in);
@@ -44,7 +45,7 @@ public class ShoppingSystem {
         System.out.println("Enter billing address");
         String account_billing_address = scanner.nextLine();
         //
-        Customer customer = new Customer(customer_id,customer_address, phone, email);
+        Customer customer = new Customer(customer_id, customer_address, phone, email);
         User user = new User(user_id, user_password, UserState.New, customer);
         ShoppingCart shoppingCart = new ShoppingCart(new Date(), user);
         Account account;
@@ -66,7 +67,6 @@ public class ShoppingSystem {
     }
 
     public void removeUser(String line) {
-        Scanner scanner = new Scanner(System.in);
         String[] list = line.split(" ");
         String user_id = list[2];
         if (!(users.containsKey(user_id))) {
@@ -75,8 +75,9 @@ public class ShoppingSystem {
         }
         this.customers.remove(this.users.get(user_id).getCustomer().getId());
         this.accounts.remove(this.users.get(user_id).getCustomer().getAccount().getId());
+        this.premiumAccounts.remove(this.users.get(user_id).getCustomer().getAccount().getId());
         this.users.remove(user_id);
-        System.out.println("The user " + user_id + "has been deleted!");
+        System.out.println("The user " + user_id + " has been deleted!");
 
 
     }
@@ -86,13 +87,13 @@ public class ShoppingSystem {
         String user_id = list[2];
         String password = list[3];
         if (currentUser != null) {
-            System.out.println("User " + currentUser.getId() + "is already logged in");
+            System.out.println("User " + currentUser.getId() + " is already logged in");
             return;
         }
         if (this.users.containsKey(user_id)) {
             if (this.users.get(user_id).getPassword().equals(password)) {
                 currentUser = this.users.get(user_id);
-                System.out.println(currentUser.getId()+" has been logged in");
+                System.out.println(currentUser.getId() + " has been logged in");
             } else {
                 System.out.println("The password is incorrect");
             }
@@ -104,11 +105,15 @@ public class ShoppingSystem {
     public void logout(String line) {
         String[] list = line.split(" ");
         String user_id = list[2];
-        if (currentUser == null){
-            System.out.println("User " + user_id + "is not existed");
+        if (currentUser == null) {
+            System.out.println("User " + user_id + " is not logged in");
+            return;
         }
         if (currentUser.getId().equals(user_id)) {
             currentUser = null;
+            System.out.println("User " + user_id + " successfully logged out");
+        } else {
+            System.out.println("User " + user_id + " is not logged in");
         }
     }
 
@@ -169,7 +174,7 @@ public class ShoppingSystem {
         System.out.println("How do you want to pay? (Immediate/Delayed)");
         String userPayment = Scanner.nextLine().toLowerCase();
 
-        System.out.println("Please add information about the payment.");
+        System.out.println("Please add details about the payment.");
         String userDetails = Scanner.nextLine().toLowerCase();
 
         Payment payment = null;
@@ -257,7 +262,7 @@ public class ShoppingSystem {
         if (this.products.containsKey(product_name)) {
             this.products.get(product_name).deleteProductFromSupplier();
             this.products.remove(product_name);
-            System.out.println("Product " +product_name + " has been deleted");
+            System.out.println("Product " + product_name + " has been deleted");
         } else {
             System.out.println("The product is not available in the system.");
         }
@@ -337,15 +342,8 @@ public class ShoppingSystem {
             System.out.println("Login id: " + toPrint.getId());
             System.out.println("Password: " + "********");
             System.out.println("State: " + toPrint.getState().toString());
-        }
-
-        if (premiumAccounts.containsKey(id)) {
-            System.out.println("------ Premium account ------");
-            PremiumAccount toPrint = premiumAccounts.get(id);
-            System.out.println(toPrint);
-            for (Product p : toPrint.getProducts()) {
-                System.out.println(p);
-            }
+            System.out.println("Users's Customer: " + toPrint.getCustomer());
+            System.out.println("Users's shopping cart: " + toPrint.getShoppingCart());
         }
 
         if (products.containsKey(id)) {
@@ -354,8 +352,13 @@ public class ShoppingSystem {
             System.out.println(toPrint);
             System.out.println("ID: " + toPrint.getId());
             System.out.println("Name: " + toPrint.getName());
-            if(toPrint.getPremiumAccount() != null) {
+            if (toPrint.getPremiumAccount() != null) {
                 System.out.println("Premium account: " + toPrint.getPremiumAccount().getId());
+            }
+            System.out.println("Product's Supplier: " + toPrint.getSupplier());
+            System.out.println("Product's Line items: ");
+            for (LineItem li : toPrint.getLineItems()) {
+                System.out.println(li);
             }
         }
 
@@ -370,5 +373,4 @@ public class ShoppingSystem {
             }
         }
     }
-
 }
