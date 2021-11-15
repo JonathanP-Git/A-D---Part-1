@@ -45,7 +45,7 @@ public class ShoppingSystem {
         System.out.println("Enter billing address");
         String account_billing_address = scanner.nextLine();
         //
-        Customer customer = new Customer(customer_id,customer_address, phone, email);
+        Customer customer = new Customer(customer_id, customer_address, phone, email);
         User user = new User(user_id, user_password, UserState.New, customer);
         ShoppingCart shoppingCart = new ShoppingCart(new Date(), user);
         Account account;
@@ -87,13 +87,13 @@ public class ShoppingSystem {
         String user_id = list[2];
         String password = list[3];
         if (currentUser != null) {
-            System.out.println("User " + currentUser.getId() + "is already logged in");
+            System.out.println("User " + currentUser.getId() + " is already logged in");
             return;
         }
         if (this.users.containsKey(user_id)) {
             if (this.users.get(user_id).getPassword().equals(password)) {
                 currentUser = this.users.get(user_id);
-                System.out.println(currentUser.getId()+" has been logged in");
+                System.out.println(currentUser.getId() + " has been logged in");
             } else {
                 System.out.println("The password is incorrect");
             }
@@ -105,11 +105,15 @@ public class ShoppingSystem {
     public void logout(String line) {
         String[] list = line.split(" ");
         String user_id = list[2];
-        if (currentUser == null){
-            System.out.println("User " + user_id + "is not existed");
+        if (currentUser == null) {
+            System.out.println("User " + user_id + " is not existed");
+            return;
         }
         if (currentUser.getId().equals(user_id)) {
             currentUser = null;
+            System.out.println("User " + user_id + " successfully logged out");
+        } else {
+            System.out.println("User " + user_id + " is not logged in");
         }
     }
 
@@ -258,7 +262,7 @@ public class ShoppingSystem {
         if (this.products.containsKey(product_name)) {
             this.products.get(product_name).deleteProductFromSupplier();
             this.products.remove(product_name);
-            System.out.println("Product " +product_name + " has been deleted");
+            System.out.println("Product " + product_name + " has been deleted");
         } else {
             System.out.println("The product is not available in the system.");
         }
@@ -348,7 +352,7 @@ public class ShoppingSystem {
             System.out.println(toPrint);
             System.out.println("ID: " + toPrint.getId());
             System.out.println("Name: " + toPrint.getName());
-            if(toPrint.getPremiumAccount() != null) {
+            if (toPrint.getPremiumAccount() != null) {
                 System.out.println("Premium account: " + toPrint.getPremiumAccount().getId());
             }
             System.out.println("Product's Supplier: " + toPrint.getSupplier());

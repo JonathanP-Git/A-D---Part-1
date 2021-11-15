@@ -41,7 +41,7 @@ public class Account {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, billing_address, is_closed, open, closed, balance, payments, orders, customer, shoppingCart);
+        return Objects.hash(id, billing_address,customer, shoppingCart);
     }
 
     public String getId() {
