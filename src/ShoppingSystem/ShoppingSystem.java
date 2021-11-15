@@ -238,8 +238,8 @@ public class ShoppingSystem {
 
     public void addProduct(String line) {
         String[] list = line.split(" ");
-        String product_name = list[3];
-        String supplier_name = list[4];
+        String product_name = list[2];
+        String supplier_name = list[3];
         if (this.suppliers.containsKey(supplier_name)) {
             Product product = new Product(product_name, product_name, this.suppliers.get(supplier_name));
             this.products.put(product_name, product);
@@ -257,6 +257,7 @@ public class ShoppingSystem {
         if (this.products.containsKey(product_name)) {
             this.products.get(product_name).deleteProductFromSupplier();
             this.products.remove(product_name);
+            System.out.println("Product " +product_name + " has been deleted");
         } else {
             System.out.println("The product is not available in the system.");
         }
