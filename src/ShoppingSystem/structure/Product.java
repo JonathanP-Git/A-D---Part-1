@@ -70,6 +70,9 @@ public class Product {
         if (this.premiumAccount == null){
         this.premiumAccount = premiumAccount;
         }
+        else if (premiumAccount == null){
+            this.premiumAccount = null;
+        }
         else{
             System.out.println("This product already has premium account");
         }
@@ -85,4 +88,5 @@ public class Product {
                 "id='" + id + '\'' +
                 '}';
     }
+
 }

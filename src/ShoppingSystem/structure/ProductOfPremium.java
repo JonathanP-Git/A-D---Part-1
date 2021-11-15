@@ -55,4 +55,9 @@ public class ProductOfPremium {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public void removeConnections() {
+        this.premiumAccount = null;
+        this.product = null;
+    }
 }

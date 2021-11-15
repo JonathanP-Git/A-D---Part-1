@@ -73,9 +73,18 @@ public class ShoppingSystem {
             System.out.println(user_id + " not existed in the system");
             return;
         }
+
+        // remove from customers hash
         this.customers.remove(this.users.get(user_id).getCustomer().getId());
-        this.accounts.remove(this.users.get(user_id).getCustomer().getAccount().getId());
-        this.premiumAccounts.remove(this.users.get(user_id).getCustomer().getAccount().getId());
+
+        String accountID = this.users.get(user_id).getCustomer().getAccount().getId();
+
+        this.accounts.remove(accountID);
+        PremiumAccount pAccount = this.premiumAccounts.getOrDefault(accountID,null);
+        if(pAccount != null) {
+            this.premiumAccounts.remove(this.users.get(user_id).getCustomer().getAccount().getId());
+            pAccount.removeConnections();
+        }
         this.users.remove(user_id);
         System.out.println("The user " + user_id + " has been deleted!");
 
