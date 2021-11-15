@@ -20,7 +20,7 @@ public class Order {
     ArrayList<Payment> payments;
     ArrayList<LineItem> lineItems;
 
-    public Order( Date ordered,Address shippedTo, OrderStatus status,
+    public Order(Date ordered,Address shippedTo, OrderStatus status,
                  Account account) {
         this.number = String.valueOf(orderNumberCounter++);
         this.ordered = ordered;
@@ -45,7 +45,7 @@ public class Order {
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, ordered, shipped, shippedTo, status, total, account, payments, lineItems);
+        return Objects.hash(ordered, shippedTo, status, account);
     }
 
     public String getNumber() {
