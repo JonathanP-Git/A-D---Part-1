@@ -106,7 +106,7 @@ public class ShoppingSystem {
         String[] list = line.split(" ");
         String user_id = list[2];
         if (currentUser == null) {
-            System.out.println("User " + user_id + " is not existed");
+            System.out.println("User " + user_id + " is not logged in");
             return;
         }
         if (currentUser.getId().equals(user_id)) {
