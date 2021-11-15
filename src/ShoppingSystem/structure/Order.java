@@ -27,6 +27,7 @@ public class Order {
         this.status = status;
         this.total = 0;
         this.account = account;
+        this.account.putOrder(this);
         this.payments = new ArrayList<>();
         this.lineItems = new ArrayList<>();
     }

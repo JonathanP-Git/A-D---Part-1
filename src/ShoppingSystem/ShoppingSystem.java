@@ -92,6 +92,7 @@ public class ShoppingSystem {
         if (this.users.containsKey(user_id)) {
             if (this.users.get(user_id).getPassword().equals(password)) {
                 currentUser = this.users.get(user_id);
+                System.out.println("Dana has been logged in");
             } else {
                 System.out.println("The password is incorrect");
             }
