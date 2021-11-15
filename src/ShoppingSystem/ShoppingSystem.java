@@ -257,6 +257,7 @@ public class ShoppingSystem {
         if (this.products.containsKey(product_name)) {
             this.products.get(product_name).deleteProductFromSupplier();
             this.products.remove(product_name);
+            System.out.println("Product " +product_name + " has been deleted");
         } else {
             System.out.println("The product is not available in the system.");
         }
