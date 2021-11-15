@@ -52,5 +52,15 @@ public class PremiumAccount extends Account {
         }
         return null;
     }
+
+    public void removeProduct(Product product) {
+        this.products.remove(product);
+        for (ProductOfPremium productOfPremium : this.products_quantity_price) {
+            if (productOfPremium.getProduct().name.equals(product.getName())) {
+                products_quantity_price.remove(productOfPremium);
+                break;
+            }
+        }
+    }
 }
 

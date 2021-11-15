@@ -27,7 +27,7 @@ public class ShoppingCart {
 
     @Override
     public int hashCode() {
-        return Objects.hash(created, user, lineItems, account);
+        return Objects.hash(created, user);
     }
 
     public void setAccount(Account account) {
