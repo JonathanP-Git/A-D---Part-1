@@ -1,9 +1,9 @@
 package ShoppingSystem.structure;
 
 import java.util.Date;
+import java.util.Objects;
 
 public abstract class Payment {
-    static int paymentNumberCounter = 1;
     String id;
     Date paid;
     float total;
@@ -12,12 +12,26 @@ public abstract class Payment {
     Order order;
 
     public Payment(Date paid, float total, String details, Account account, Order order) {
-        this.id = String.valueOf(paymentNumberCounter++);
         this.paid = paid;
         this.total = total;
         this.details = details;
         this.account = account;
         this.order = order;
+        this.id = String.valueOf(this.hashCode()); // override this.id
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Payment payment = (Payment) o;
+        return Float.compare(payment.total, total) == 0 && Objects.equals(id, payment.id) && Objects.equals(paid, payment.paid) && Objects.equals(details, payment.details) && Objects.equals(account, payment.account) && Objects.equals(order, payment.order);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(paid, total, details, account, order);
     }
 
     @Override

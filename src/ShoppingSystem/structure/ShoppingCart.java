@@ -3,6 +3,7 @@ package ShoppingSystem.structure;
 import java.util.*;
 
 public class ShoppingCart {
+    String id;
     Date created;
     User user;
     ArrayList<LineItem> lineItems;
@@ -12,6 +13,21 @@ public class ShoppingCart {
         this.created = created;
         this.user = user;
         this.lineItems = new ArrayList<>();
+        this.id = String.valueOf(this.hashCode()); // override this.id
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShoppingCart that = (ShoppingCart) o;
+        return Objects.equals(id, that.id) && Objects.equals(created, that.created) && Objects.equals(user, that.user) && Objects.equals(lineItems, that.lineItems) && Objects.equals(account, that.account);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(created, user, lineItems, account);
     }
 
     public void setAccount(Account account) {

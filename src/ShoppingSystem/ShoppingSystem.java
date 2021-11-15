@@ -39,8 +39,8 @@ public class ShoppingSystem {
         String phone = scanner.nextLine();
         System.out.println("Enter Email");
         String email = scanner.nextLine();
-        System.out.println("Enter account id");
-        String account_id = scanner.nextLine();
+//        System.out.println("Enter account id");
+//        String account_id = scanner.nextLine();
         System.out.println("Enter billing address");
         String account_billing_address = scanner.nextLine();
         //
@@ -49,10 +49,10 @@ public class ShoppingSystem {
         ShoppingCart shoppingCart = new ShoppingCart(new Date(), user);
         Account account;
         if (!premium) {
-            account = new Account(account_id, account_billing_address, customer, shoppingCart);
+            account = new Account(customer_id, account_billing_address, customer, shoppingCart);
         } else {
-            account = new PremiumAccount(account_id, account_billing_address, customer, shoppingCart);
-            premiumAccounts.put(account_id, (PremiumAccount) account);
+            account = new PremiumAccount(customer_id, account_billing_address, customer, shoppingCart);
+            premiumAccounts.put(account.getId(), (PremiumAccount) account);
         }
         //
         shoppingCart.setAccount(account);
@@ -353,7 +353,9 @@ public class ShoppingSystem {
             System.out.println(toPrint);
             System.out.println("ID: " + toPrint.getId());
             System.out.println("Name: " + toPrint.getName());
-            System.out.println("Premium account: " + toPrint.getPremiumAccount().getId());
+            if(toPrint.getPremiumAccount() != null) {
+                System.out.println("Premium account: " + toPrint.getPremiumAccount().getId());
+            }
         }
 
         if (suppliers.containsKey(id)) {
