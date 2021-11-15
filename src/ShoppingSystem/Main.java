@@ -38,7 +38,7 @@ public class Main {
         Customer danaCustomer = new Customer("Dana",new Address("Tel-Aviv"),"123","abc@gmail.com");
         User dana = new User("Dana","Dana123", UserState.New,danaCustomer);
         ShoppingCart shoppingCart2 = new ShoppingCart(new Date(), dana);
-        PremiumAccount danaAccount = new PremiumAccount("Dana","Beer-Sheva",daniCustomer,shoppingCart2);
+        PremiumAccount danaAccount = new PremiumAccount("Dana","Beer-Sheva",danaCustomer,shoppingCart2);
         danaAccount.addProduct(bamba,20,3);
 
         ss.users.put(dani.getId(),dani);
@@ -61,8 +61,6 @@ public class Main {
         ss.allObj.put(daniAccount.getId(),daniAccount);
         ss.allObj.put(danaAccount.getId(),danaAccount);
 
-
-        //bla
     }
 
     private static void processArguments(String[] args) {
@@ -72,7 +70,9 @@ public class Main {
     private static void processInput(ShoppingSystem shoppingSystem, InputStream in) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String line;
-        System.out.println("TAFRIT");
+        System.out.println("Welcome the 'Shopping System Pro 3000'");
+        System.out.println("--------------------------------------");
+        callMenu();
         while (!(line = reader.readLine()).equals("exit")) {
             if (line.toLowerCase().startsWith("add user")) {
                 shoppingSystem.addUser(line);
@@ -98,13 +98,34 @@ public class Main {
             else if (line.toLowerCase().startsWith("delete product")) {
                 shoppingSystem.deleteProduct(line);
             }
-            else if (line.toLowerCase().startsWith("showallobjects")) {
+            else if (line.toLowerCase().startsWith("showallobjects") || line.toLowerCase().startsWith("show all objects")) {
                 shoppingSystem.showAllObjects();
-            }else if (line.toLowerCase().startsWith("showobjectid")) {
+            }else if (line.toLowerCase().startsWith("showobjectid") || line.toLowerCase().startsWith("show object id")) {
                 shoppingSystem.showObjectId(line);
             }
+            else{
+                System.out.println("Wrong input, try agian");
+            }
+            callMenu();
         }
         in.close();
+    }
+
+    private static void callMenu() {
+        System.out.println("In order interact with the system write one of the options below:");
+        System.out.println("1. Add user {login_id}");
+        System.out.println("2. Remove user {login_id}");
+        System.out.println("3. Login user {login_id} {password}");
+        System.out.println("4. Logout user {login_id}");
+        System.out.println("5. Create new order {address}");
+        System.out.println("6. Add product to order {order_id} {login_id} {product_name}");
+        System.out.println("7. Display order");
+        System.out.println("8. Link product {product_name} {price} {quantity}");
+        System.out.println("9. Add product {product_name} {supplier_name}");
+        System.out.println("10. Delete product {product_name}");
+        System.out.println("11. Show all objects");
+        System.out.println("12. Show object id {object id}");
+        System.out.println("13. Exit");
     }
 
 }

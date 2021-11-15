@@ -25,6 +25,7 @@ public class Account {
         this.payments = new ArrayList<>();
         this.orders = new ArrayList<>();
         this.customer = customer;
+        this.customer.setAccount(this);
         this.shoppingCart = shoppingCart;
     }
 
@@ -44,7 +45,7 @@ public class Account {
         this.billing_address = billing_address;
     }
 
-    public boolean isIs_closed() {
+    public boolean getIs_closed() {
         return is_closed;
     }
 
@@ -86,6 +87,10 @@ public class Account {
 
     public ArrayList<Order> getOrders() {
         return orders;
+    }
+
+    public void putOrder(Order order){
+        this.orders.add(order);
     }
 
     public void setOrders(ArrayList<Order> orders) {

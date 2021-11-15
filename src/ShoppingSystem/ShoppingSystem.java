@@ -15,7 +15,7 @@ public class ShoppingSystem {
     HashMap<String, Product> products = new HashMap();
     HashMap<String, Supplier> suppliers = new HashMap();
     User currentUser = null;
-    HashMap<String, Object>  allObj = new HashMap<>();
+    HashMap<String, Object> allObj = new HashMap<>();
 
     public void addUser(String line) {
         Scanner scanner = new Scanner(System.in);
@@ -61,7 +61,7 @@ public class ShoppingSystem {
         this.users.put(user.getId(), user);
         this.customers.put(customer.getId(), customer);
         this.accounts.put(account.getId(), account);
-        System.out.println("The user " + user_id + "has been added!");
+        System.out.println("The user " + user_id + " has been added!");
 
     }
 
@@ -92,6 +92,7 @@ public class ShoppingSystem {
         if (this.users.containsKey(user_id)) {
             if (this.users.get(user_id).getPassword().equals(password)) {
                 currentUser = this.users.get(user_id);
+                System.out.println("Dana has been logged in");
             } else {
                 System.out.println("The password is incorrect");
             }
@@ -103,10 +104,11 @@ public class ShoppingSystem {
     public void logout(String line) {
         String[] list = line.split(" ");
         String user_id = list[2];
+        if (currentUser == null){
+            System.out.println("User " + user_id + "is not existed");
+        }
         if (currentUser.getId().equals(user_id)) {
             currentUser = null;
-        } else {
-            System.out.println("User " + user_id + "is not existed");
         }
     }
 
@@ -208,7 +210,7 @@ public class ShoppingSystem {
         Order order = currAccOrders.get(currAccOrders.size() - 1);
         System.out.println("Order number: " + order.getNumber());
         System.out.println("Order date: " + order.getOrdered());
-        System.out.println("Shipping date: " + order.getShipped().toString());
+        System.out.println("Shipping date: " + order.getShipped());
         System.out.println("Shipping address: " + order.getShippedTo());
         System.out.println("Order status: " + order.getStatus().toString());
         System.out.println("Total payment " + order.getTotal());
@@ -229,7 +231,8 @@ public class ShoppingSystem {
             return;
         }
         Product product = products.get(product_name);
-        ((PremiumAccount)currentUser.getCustomer().getAccount()).addProduct(product,Integer.parseInt(price),Integer.parseInt(quantity));
+        ((PremiumAccount) currentUser.getCustomer().getAccount()).addProduct(product, Integer.parseInt(price),
+                Integer.parseInt(quantity));
         System.out.println("The product has been linked");
 
     }
@@ -238,11 +241,10 @@ public class ShoppingSystem {
         String[] list = line.split(" ");
         String product_name = list[3];
         String supplier_name = list[4];
-        if (this.suppliers.containsKey(supplier_name)){
-            Product product = new Product(product_name,product_name, this.suppliers.get(supplier_name));
-            this.products.put(product_name,product);
-        }
-        else {
+        if (this.suppliers.containsKey(supplier_name)) {
+            Product product = new Product(product_name, product_name, this.suppliers.get(supplier_name));
+            this.products.put(product_name, product);
+        } else {
             Supplier supplier = new Supplier(supplier_name, supplier_name);
             this.suppliers.put(supplier.getId(), supplier);
             Product product = new Product(product_name, product_name, supplier);
@@ -252,12 +254,11 @@ public class ShoppingSystem {
 
     public void deleteProduct(String line) {
         String[] list = line.split(" ");
-        String product_name = list[3];
-        if (this.products.containsKey(product_name)){
+        String product_name = list[2];
+        if (this.products.containsKey(product_name)) {
             this.products.get(product_name).deleteProductFromSupplier();
             this.products.remove(product_name);
-        }
-        else{
+        } else {
             System.out.println("The product is not available in the system.");
         }
     }
@@ -290,11 +291,82 @@ public class ShoppingSystem {
     }
 
     public void showObjectId(String line) {
-        String id = line.split(" ")[1];
-        Object toPrint = this.allObj.get(id);
-        System.out.println(toPrint.toString());
+        String id = line.split(" ")[3];
 
+        if (accounts.containsKey(id)) {
+            System.out.println("------ Account ------");
+            Account toPrint = accounts.get(id);
+            System.out.println(toPrint);
+            System.out.println("Balance: " + toPrint.getBalance());
+            System.out.println("Billing Address: " + toPrint.getBilling_address());
+            System.out.println("Open Date: " + toPrint.getOpen());
+            System.out.println("Close Date: " + toPrint.getClosed());
+            System.out.println("Is Closed?: " + toPrint.getIs_closed());
+            System.out.println("Customer:" + toPrint.getCustomer());
+            System.out.println("Payments: ");
+            for (Payment p : toPrint.getPayments()) {
+                System.out.println(p);
+            }
+            System.out.println("Orders: ");
+            for (Order o : toPrint.getOrders()) {
+                System.out.println(o);
+            }
+            System.out.println(toPrint.getShoppingCart());
+            if (premiumAccounts.containsKey(id)) {
+                PremiumAccount pa = premiumAccounts.get(id);
+                for (Product pr : pa.getProducts()) {
+                    System.out.println(pr);
+                }
+            }
+        }
+        if (customers.containsKey(id)) {
+            System.out.println("------ Customer ------");
+            Customer toPrint = customers.get(id);
+            System.out.println(toPrint);
+            System.out.println("Address: " + toPrint.getAddress());
+            System.out.println("Phone: " + toPrint.getPhone());
+            System.out.println("Email: " + toPrint.getEmail());
+            System.out.println("Customer's User: " + toPrint.getUser());
+            System.out.println("Customer's Account: " + toPrint.getAccount());
+        }
 
+        if (users.containsKey(id)) {
+            System.out.println("------ User ------");
+            User toPrint = users.get(id);
+            System.out.println(toPrint);
+            System.out.println("Login id: " + toPrint.getId());
+            System.out.println("Password: " + "********");
+            System.out.println("State: " + toPrint.getState().toString());
+        }
+
+        if (premiumAccounts.containsKey(id)) {
+            System.out.println("------ Premium account ------");
+            PremiumAccount toPrint = premiumAccounts.get(id);
+            System.out.println(toPrint);
+            for (Product p : toPrint.getProducts()) {
+                System.out.println(p);
+            }
+        }
+
+        if (products.containsKey(id)) {
+            System.out.println("------ Product------");
+            Product toPrint = products.get(id);
+            System.out.println(toPrint);
+            System.out.println("ID: " + toPrint.getId());
+            System.out.println("Name: " + toPrint.getName());
+            System.out.println("Premium account: " + toPrint.getPremiumAccount().getId());
+        }
+
+        if (suppliers.containsKey(id)) {
+            System.out.println("------ Supplier------");
+            Supplier toPrint = suppliers.get(id);
+            System.out.println(toPrint);
+            System.out.println("ID: " + toPrint.getId());
+            System.out.println("Name: " + toPrint.getName());
+            for (Product p : toPrint.getProducts()) {
+                System.out.println(p);
+            }
+        }
     }
 
 }
