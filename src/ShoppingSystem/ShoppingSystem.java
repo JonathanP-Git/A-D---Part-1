@@ -173,6 +173,7 @@ public class ShoppingSystem {
         Scanner Scanner = new Scanner(System.in);  // Create a Scanner object
         System.out.println("How many " + product_name + " do you want to buy?");
         String userQuantity = Scanner.nextLine();
+        order.addTotal(Integer.parseInt(userQuantity)*premiumAccProduct.getPrice());
 
         boolean addedLineItem = order.addLineItem(premiumAccProduct, Integer.parseInt(userQuantity),
                 this.currentUser);
@@ -210,6 +211,7 @@ public class ShoppingSystem {
         if (payment == null) {
             return;
         }
+
         this.currentUser.getCustomer().getAccount().addPayment(payment);
 
     }
@@ -237,11 +239,15 @@ public class ShoppingSystem {
 
     public void linkProduct(String line) {
         String[] list = line.split(" ");
-        String product_name = list[3];
-        String price = list[4];
-        String quantity = list[5];
-        if (currentUser == null || !(premiumAccounts.containsKey(currentUser.getId()))) {
+        String product_name = list[2];
+        String price = list[3];
+        String quantity = list[4];
+        if (currentUser == null) {
             System.out.println("No user is logged in.");
+            return;
+        }
+        if(!(currentUser.getCustomer().getAccount() instanceof PremiumAccount)){
+            System.out.println("The user doesn't have premium account");
             return;
         }
         if (!(products.containsKey(product_name))) {
@@ -249,9 +255,10 @@ public class ShoppingSystem {
             return;
         }
         Product product = products.get(product_name);
-        ((PremiumAccount) currentUser.getCustomer().getAccount()).addProduct(product, Integer.parseInt(price),
-                Integer.parseInt(quantity));
-        System.out.println("The product has been linked");
+        if(((PremiumAccount) currentUser.getCustomer().getAccount()).addProduct(product, Integer.parseInt(price),
+                Integer.parseInt(quantity))){
+            System.out.println("The product has been linked");
+        }
     }
 
     public void addProduct(String line) {

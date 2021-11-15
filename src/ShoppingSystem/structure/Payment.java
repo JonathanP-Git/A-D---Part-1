@@ -17,6 +17,7 @@ public abstract class Payment {
         this.details = details;
         this.account = account;
         this.order = order;
+        this.order.addPayment(this);
         this.id = String.valueOf(this.hashCode()); // override this.id
 
     }

@@ -155,4 +155,12 @@ public class Order {
                 "number='" + number + '\'' +
                 '}';
     }
+
+    public void addTotal(int i) {
+        this.total += i;
+    }
+
+    public void addPayment(Payment payment) {
+        this.payments.add(payment);
+    }
 }
