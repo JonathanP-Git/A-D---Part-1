@@ -29,13 +29,13 @@ public class Main {
         Product ramen = new Product("Ramen","Ramen",eastWest);
 
         // dani regular account
-        Customer daniCustomer = new Customer("Dani",new Address("Tel-Aviv"),"123","abc@gmail.com");
+        Customer daniCustomer = new Customer("Dani",new Address("Tel-Aviv"),"123","dani@gmail.com");
         User dani = new User("Dani","Dani123", UserState.New,daniCustomer);
         ShoppingCart shoppingCart = new ShoppingCart(new Date(), dani);
         Account daniAccount = new Account("Dani","Beer-Sheva",daniCustomer,shoppingCart);
 
         // Dana premium account
-        Customer danaCustomer = new Customer("Dana",new Address("Tel-Aviv"),"123","abc@gmail.com");
+        Customer danaCustomer = new Customer("Dana",new Address("Tel-Aviv"),"123","dana@gmail.com");
         User dana = new User("Dana","Dana123", UserState.New,danaCustomer);
         ShoppingCart shoppingCart2 = new ShoppingCart(new Date(), dana);
         PremiumAccount danaAccount = new PremiumAccount("Dana","Beer-Sheva",danaCustomer,shoppingCart2);
@@ -58,8 +58,8 @@ public class Main {
         //
         ss.premiumAccounts.put(danaAccount.getId(),danaAccount);
 
-        ss.allObj.put(daniAccount.getId(),daniAccount);
-        ss.allObj.put(danaAccount.getId(),danaAccount);
+//        ss.allObj.put(daniAccount.getId(),daniAccount);
+//        ss.allObj.put(danaAccount.getId(),danaAccount);
 
     }
 

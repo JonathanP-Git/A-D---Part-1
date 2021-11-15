@@ -44,7 +44,7 @@ public class ShoppingSystem {
         System.out.println("Enter billing address");
         String account_billing_address = scanner.nextLine();
         //
-        Customer customer = new Customer(customer_id, customer_address, phone, email);
+        Customer customer = new Customer(customer_id,customer_address, phone, email);
         User user = new User(user_id, user_password, UserState.New, customer);
         ShoppingCart shoppingCart = new ShoppingCart(new Date(), user);
         Account account;
@@ -92,7 +92,7 @@ public class ShoppingSystem {
         if (this.users.containsKey(user_id)) {
             if (this.users.get(user_id).getPassword().equals(password)) {
                 currentUser = this.users.get(user_id);
-                System.out.println("Dana has been logged in");
+                System.out.println(currentUser.getId()+" has been logged in");
             } else {
                 System.out.println("The password is incorrect");
             }
@@ -234,7 +234,6 @@ public class ShoppingSystem {
         ((PremiumAccount) currentUser.getCustomer().getAccount()).addProduct(product, Integer.parseInt(price),
                 Integer.parseInt(quantity));
         System.out.println("The product has been linked");
-
     }
 
     public void addProduct(String line) {
