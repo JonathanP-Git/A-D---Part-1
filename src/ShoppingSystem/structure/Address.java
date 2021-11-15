@@ -14,4 +14,9 @@ public class Address {
 //        this.city = city;
 //        this.number = number;
     }
+
+    @Override
+    public String toString() {
+        return address;
+    }
 }

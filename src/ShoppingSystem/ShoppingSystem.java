@@ -104,10 +104,11 @@ public class ShoppingSystem {
     public void logout(String line) {
         String[] list = line.split(" ");
         String user_id = list[2];
+        if (currentUser == null){
+            System.out.println("User " + user_id + "is not existed");
+        }
         if (currentUser.getId().equals(user_id)) {
             currentUser = null;
-        } else {
-            System.out.println("User " + user_id + "is not existed");
         }
     }
 
@@ -209,7 +210,7 @@ public class ShoppingSystem {
         Order order = currAccOrders.get(currAccOrders.size() - 1);
         System.out.println("Order number: " + order.getNumber());
         System.out.println("Order date: " + order.getOrdered());
-        System.out.println("Shipping date: " + order.getShipped().toString());
+        System.out.println("Shipping date: " + order.getShipped());
         System.out.println("Shipping address: " + order.getShippedTo());
         System.out.println("Order status: " + order.getStatus().toString());
         System.out.println("Total payment " + order.getTotal());
