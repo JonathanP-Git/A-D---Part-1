@@ -20,7 +20,23 @@ public class Order {
     ArrayList<Payment> payments;
     ArrayList<LineItem> lineItems;
 
-    public Order(Date ordered,Address shippedTo, OrderStatus status,
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public static int getOrderNumberCounter() {
+        return orderNumberCounter;
+    }
+
+    public static void setOrderNumberCounter(int orderNumberCounter) {
+        Order.orderNumberCounter = orderNumberCounter;
+    }
+
+    public Order(Date ordered, Address shippedTo, OrderStatus status,
                  Account account) {
         this.number = String.valueOf(orderNumberCounter++);
         this.ordered = ordered;

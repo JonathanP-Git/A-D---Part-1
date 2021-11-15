@@ -132,9 +132,9 @@ public class ShoppingSystem {
 
     public void addProductToOrder(String line) {
         String[] list = line.split(" ");
-        String order_id = list[3];
-        String user_from_id = list[4];
-        String product_name = list[5];
+        String order_id = list[4];
+        String user_from_id = list[5];
+        String product_name = list[6];
 
         if (currentUser == null) {
             System.out.println("No user is logged in.");
@@ -144,6 +144,10 @@ public class ShoppingSystem {
         // user to buy the product from
         User userToBuy = this.users.get(user_from_id);
 
+        if (userToBuy == null){
+            System.out.println("The given user is not existed");
+            return;
+        }
         // check if user account is premium account
         PremiumAccount userAcc = premiumAccounts.getOrDefault(userToBuy.getCustomer().getAccount().getId(), null);
         if (userAcc == null) {
@@ -159,6 +163,11 @@ public class ShoppingSystem {
         }
 
         Order order = orders.get(order_id);
+
+        if (order == null){
+            System.out.println("The order " + order_id + " is not existed");
+            return;
+        }
 
         // ask user for quantity
         Scanner Scanner = new Scanner(System.in);  // Create a Scanner object
@@ -212,6 +221,10 @@ public class ShoppingSystem {
         }
 
         ArrayList<Order> currAccOrders = this.currentUser.getCustomer().getAccount().getOrders();
+        if (currAccOrders.size() == 0){
+            System.out.println("The user doesn't have orders");
+            return;
+        }
         Order order = currAccOrders.get(currAccOrders.size() - 1);
         System.out.println("Order number: " + order.getNumber());
         System.out.println("Order date: " + order.getOrdered());
@@ -369,6 +382,26 @@ public class ShoppingSystem {
             System.out.println("ID: " + toPrint.getId());
             System.out.println("Name: " + toPrint.getName());
             for (Product p : toPrint.getProducts()) {
+                System.out.println(p);
+            }
+        }
+
+        if (orders.containsKey(id)) {
+            System.out.println("------ Orders------");
+            Order toPrint = orders.get(id);
+            System.out.println("ID: " + toPrint.getId());
+            System.out.println("Number: " + toPrint.getNumber());
+            System.out.println("Ordered date: " + toPrint.getOrdered());
+            System.out.println("Shipped date: " + toPrint.getShipped());
+            System.out.println("Status: " + toPrint.getStatus().toString());
+            System.out.println("Total: " + toPrint.getTotal());
+            System.out.println("Account: " + toPrint.getAccount().toString());
+            System.out.println("Payments:");
+            for (Payment p : toPrint.getPayments()) {
+                System.out.println(p);
+            }
+            System.out.println("Line items: ");
+            for (LineItem p : toPrint.getLineItems()) {
                 System.out.println(p);
             }
         }
