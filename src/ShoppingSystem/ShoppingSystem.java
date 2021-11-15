@@ -16,6 +16,7 @@ public class ShoppingSystem {
     HashMap<String, Supplier> suppliers = new HashMap();
     User currentUser = null;
     HashMap<String, Object> allObj = new HashMap<>();
+    static public int globalId = 0;
 
     public void addUser(String line) {
         Scanner scanner = new Scanner(System.in);
@@ -66,7 +67,6 @@ public class ShoppingSystem {
     }
 
     public void removeUser(String line) {
-        Scanner scanner = new Scanner(System.in);
         String[] list = line.split(" ");
         String user_id = list[2];
         if (!(users.containsKey(user_id))) {
@@ -337,15 +337,8 @@ public class ShoppingSystem {
             System.out.println("Login id: " + toPrint.getId());
             System.out.println("Password: " + "********");
             System.out.println("State: " + toPrint.getState().toString());
-        }
-
-        if (premiumAccounts.containsKey(id)) {
-            System.out.println("------ Premium account ------");
-            PremiumAccount toPrint = premiumAccounts.get(id);
-            System.out.println(toPrint);
-            for (Product p : toPrint.getProducts()) {
-                System.out.println(p);
-            }
+            System.out.println("Users's Customer: " + toPrint.getCustomer());
+            System.out.println("Users's shopping cart: " + toPrint.getShoppingCart());
         }
 
         if (products.containsKey(id)) {
@@ -356,6 +349,11 @@ public class ShoppingSystem {
             System.out.println("Name: " + toPrint.getName());
             if(toPrint.getPremiumAccount() != null) {
                 System.out.println("Premium account: " + toPrint.getPremiumAccount().getId());
+            }
+            System.out.println("Product's Supplier: " + toPrint.getSupplier());
+            System.out.println("Product's Line items: ");
+            for (LineItem li : toPrint.getLineItems()) {
+                System.out.println(li);
             }
         }
 
