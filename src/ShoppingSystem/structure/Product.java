@@ -81,6 +81,9 @@ public class Product {
     public void deleteProductFromSupplier(){
        this.supplier.removeProduct(this);
     }
+    public void deleteProductFromPA(){
+       this.premiumAccount.removeProduct(this);
+    }
 
     @Override
     public String toString() {
