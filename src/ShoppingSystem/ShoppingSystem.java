@@ -19,7 +19,9 @@ public class ShoppingSystem {
     public void addUser(String line) {
         Scanner scanner = new Scanner(System.in);
         String[] list = line.split(" ");
-        if(list.length < 3){return;}
+        if (list.length < 3) {
+            return;
+        }
 
         String user_id = list[2];
         if (users.containsKey(user_id)) {
@@ -68,7 +70,9 @@ public class ShoppingSystem {
 
     public void removeUser(String line) {
         String[] list = line.split(" ");
-        if(list.length < 3){return;}
+        if (list.length < 3) {
+            return;
+        }
 
         String user_id = list[2];
         if (!(users.containsKey(user_id))) {
@@ -85,8 +89,8 @@ public class ShoppingSystem {
         // remove from customers ShoppingSystem list the user customer
         this.customers.remove(userToRemove.getCustomer().getId());
         // remove from orders ShoppingSystem list all the user orders
-        for (Order o: userToRemove.getCustomer().getAccount().getOrders()
-             ) {
+        for (Order o : userToRemove.getCustomer().getAccount().getOrders()
+        ) {
             this.orders.remove(o.getId());
         }
 
@@ -102,7 +106,9 @@ public class ShoppingSystem {
 
     public void login(String line) {
         String[] list = line.split(" ");
-        if(list.length < 4){return;}
+        if (list.length < 4) {
+            return;
+        }
         String user_id = list[2];
         String password = list[3];
         if (currentUser != null) {
@@ -123,7 +129,9 @@ public class ShoppingSystem {
 
     public void logout(String line) {
         String[] list = line.split(" ");
-        if(list.length < 3){return;}
+        if (list.length < 3) {
+            return;
+        }
 
         String user_id = list[2];
         if (currentUser == null) {
@@ -140,7 +148,9 @@ public class ShoppingSystem {
 
     public void createNewOrder(String line) {
         String[] list = line.split(" ");
-        if(list.length < 4){return;}
+        if (list.length < 4) {
+            return;
+        }
 
         String address = list[3];
         if (currentUser == null) {
@@ -155,7 +165,9 @@ public class ShoppingSystem {
 
     public void addProductToOrder(String line) {
         String[] list = line.split(" ");
-        if(list.length < 7){return;}
+        if (list.length < 7) {
+            return;
+        }
         String order_id = list[4];
         String user_from_id = list[5];
         String product_name = list[6];
@@ -202,14 +214,14 @@ public class ShoppingSystem {
         System.out.println("How many " + product_name + " do you want to buy?");
         String userQuantity = Scanner.nextLine();
         int userMoney = currentUser.getCustomer().getAccount().getBalance();
-        int buySum = Integer.parseInt(userQuantity)*premiumAccProduct.getPrice();
-        if( userMoney < buySum){
-            System.out.println("You have just " + userMoney +" left in your account but it costs " +buySum);
+        int buySum = Integer.parseInt(userQuantity) * premiumAccProduct.getPrice();
+        if (userMoney < buySum) {
+            System.out.println("You have just " + userMoney + " left in your account but it costs " + buySum);
             return;
         }
         order.addTotal(buySum);
-        currentUser.getCustomer().getAccount().setBalance(userMoney-buySum); // decrease from balance
-        userAcc.setBalance(userAcc.getBalance()+buySum); // add money to seller
+        currentUser.getCustomer().getAccount().setBalance(userMoney - buySum); // decrease from balance
+        userAcc.setBalance(userAcc.getBalance() + buySum); // add money to seller
 
         boolean addedLineItem = order.addLineItem(premiumAccProduct, Integer.parseInt(userQuantity),
                 this.currentUser);
@@ -285,7 +297,9 @@ public class ShoppingSystem {
 
     public void linkProduct(String line) {
         String[] list = line.split(" ");
-        if(list.length < 5){return;}
+        if (list.length < 5) {
+            return;
+        }
         String product_name = list[2];
         String price = list[3];
         String quantity = list[4];
@@ -293,7 +307,7 @@ public class ShoppingSystem {
             System.out.println("No user is logged in.");
             return;
         }
-        if(!(currentUser.getCustomer().getAccount() instanceof PremiumAccount)){
+        if (!(currentUser.getCustomer().getAccount() instanceof PremiumAccount)) {
             System.out.println("The user doesn't have premium account");
             return;
         }
@@ -306,15 +320,17 @@ public class ShoppingSystem {
             return;
         }
         Product product = products.get(product_name);
-        if(((PremiumAccount) currentUser.getCustomer().getAccount()).addProduct(product, Integer.parseInt(price),
-                Integer.parseInt(quantity))){
+        if (((PremiumAccount) currentUser.getCustomer().getAccount()).addProduct(product, Integer.parseInt(price),
+                Integer.parseInt(quantity))) {
             System.out.println("The product has been linked");
         }
     }
 
     public void addProduct(String line) {
         String[] list = line.split(" ");
-        if(list.length < 4){return;}
+        if (list.length < 4) {
+            return;
+        }
         String product_name = list[2];
         String supplier_name = list[3];
         if (this.suppliers.containsKey(supplier_name)) {
@@ -330,7 +346,9 @@ public class ShoppingSystem {
 
     public void deleteProduct(String line) {
         String[] list = line.split(" ");
-        if(list.length < 3){return;}
+        if (list.length < 3) {
+            return;
+        }
         String product_name = list[2];
         if (this.products.containsKey(product_name)) {
             this.products.get(product_name).deleteProductFromSupplier();
@@ -372,10 +390,12 @@ public class ShoppingSystem {
     }
 
     public void showObjectId(String line) {
-         String[] list = line.split(" ");
-        if(list.length < 4){return;}
+        String[] list = line.split(" ");
+        if (list.length < 4) {
+            return;
+        }
 
-         String id = list[3];
+        String id = list[3];
         boolean exist = false;
 
         if (accounts.containsKey(id)) {
@@ -478,7 +498,7 @@ public class ShoppingSystem {
                 System.out.println(p);
             }
         }
-        if (!exist){
+        if (!exist) {
             System.out.println("The id - " + id + " is not exist");
         }
     }

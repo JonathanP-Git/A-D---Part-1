@@ -55,24 +55,25 @@ public class Product {
     }
 
     public void setPremiumAccount(PremiumAccount premiumAccount) {
-        if (this.premiumAccount == null){
-        this.premiumAccount = premiumAccount;
-        }
-        else if (premiumAccount == null){
+        if (this.premiumAccount == null) {
+            this.premiumAccount = premiumAccount;
+        } else if (premiumAccount == null) {
             this.premiumAccount = null;
-        }
-        else{
+        } else {
             System.out.println("This product already has premium account");
         }
     }
 
-    public void deleteProductFromSupplier(){
-       this.supplier.removeProduct(this);
-       this.supplier = null;
+    public void deleteProductFromSupplier() {
+        this.supplier.removeProduct(this);
+        this.supplier = null;
     }
-    public void deleteProductFromPA(){
-       this.premiumAccount.removeProduct(this);
-       this.premiumAccount = null;
+
+    public void deleteProductFromPA() {
+        if (this.premiumAccount != null) {
+            this.premiumAccount.removeProduct(this);
+            this.premiumAccount = null;
+        }
     }
 
     @Override
@@ -83,7 +84,7 @@ public class Product {
     }
 
     public void deleteLineItems() {
-        for(LineItem li: this.lineItems){
+        for (LineItem li : this.lineItems) {
             li.removeFromOrder();
             li.removeFromShoppingCart();
         }
