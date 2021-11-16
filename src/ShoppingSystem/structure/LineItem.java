@@ -52,4 +52,8 @@ public class LineItem {
     public void removeFromShoppingCart() {
         this.shoppingCart.lineItems.remove(this);
     }
+
+    public void removeFromProduct() {
+        this.product.lineItems.remove(this);
+    }
 }

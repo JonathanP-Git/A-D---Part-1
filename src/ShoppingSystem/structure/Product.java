@@ -80,9 +80,11 @@ public class Product {
 
     public void deleteProductFromSupplier(){
        this.supplier.removeProduct(this);
+       this.supplier = null;
     }
     public void deleteProductFromPA(){
        this.premiumAccount.removeProduct(this);
+       this.premiumAccount = null;
     }
 
     @Override

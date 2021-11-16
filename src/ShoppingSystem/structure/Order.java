@@ -164,4 +164,16 @@ public class Order {
     public void addPayment(Payment payment) {
         this.payments.add(payment);
     }
+
+    public void removeLineItems() {
+        this.lineItems.clear();
+    }
+
+    public void removePayment() {
+        for (Payment p: this.payments
+             ) {
+            p.removeOrder();
+        }
+        this.payments.clear();
+    }
 }

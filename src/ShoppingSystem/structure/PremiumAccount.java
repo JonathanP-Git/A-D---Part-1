@@ -78,5 +78,14 @@ public class PremiumAccount extends Account {
         }
 
     }
+
+    public void removeProducts() {
+        for (Product p: this.products
+             ) {
+            removeProduct(p);
+        }
+        this.products.clear();
+        this.products_quantity_price.clear();
+    }
 }
 

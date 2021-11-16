@@ -72,20 +72,29 @@ public class ShoppingSystem {
             return;
         }
 
-        // remove from customers hash
-        this.customers.remove(this.users.get(user_id).getCustomer().getId());
+        User userToRemove = this.users.get(user_id);
 
-        String accountID = this.users.get(user_id).getCustomer().getAccount().getId();
+        // remove from premiumAccounts ShoppingSystem list
+        this.premiumAccounts.remove(userToRemove.getCustomer().getAccount().getId(),null);
 
-        this.accounts.remove(accountID);
-        PremiumAccount pAccount = this.premiumAccounts.getOrDefault(accountID,null);
-        if(pAccount != null) {
-            this.premiumAccounts.remove(this.users.get(user_id).getCustomer().getAccount().getId());
-            pAccount.removeConnections();
+        // remove from accounts ShoppingSystem list the user account
+        this.accounts.remove(userToRemove.getCustomer().getAccount().getId());
+        // remove from customers ShoppingSystem list the user customer
+        this.customers.remove(userToRemove.getCustomer().getId());
+        // remove from orders ShoppingSystem list all the user orders
+        for (Order o: userToRemove.getCustomer().getAccount().getOrders()
+             ) {
+            this.orders.remove(o.getId());
         }
+        // remove from users ShoppingSystem list
         this.users.remove(user_id);
-        System.out.println("The user " + user_id + " has been deleted!");
 
+        // remove shopping cart,account,customer,payment,order,lineItem
+        userToRemove.removeShoppingCart();
+
+
+
+        System.out.println("The user " + user_id + " has been deleted!");
 
     }
 

@@ -41,4 +41,12 @@ public abstract class Payment {
                 "id='" + id + '\'' +
                 '}';
     }
+
+    public  void removeAccount(){
+        this.account = null;
+    }
+
+    public  void removeOrder(){
+        this.order = null;
+    }
 }

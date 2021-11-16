@@ -98,4 +98,13 @@ public class Customer {
                 "id='" + id + '\'' +
                 '}';
     }
+
+    public void removeUser() {
+        this.user.removeCustomer();
+        this.user = null;
+    }
+
+    public void removeAccount() {
+        this.account = null;
+    }
 }

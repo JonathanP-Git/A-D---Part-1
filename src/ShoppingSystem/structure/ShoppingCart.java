@@ -61,4 +61,26 @@ public class ShoppingCart {
     public Account getAccount() {
         return account;
     }
+
+    public void removeLineItems() {
+        for (LineItem li: this.lineItems
+             ) {
+            li.removeFromOrder();
+            li.removeFromProduct();
+        }
+        this.lineItems.clear();
+    }
+
+    public void removeAccount() {
+        this.account.removeCustomer();
+        this.account.removePayments();
+        this.account.removeOrders();
+
+        if(this.account instanceof PremiumAccount){
+            PremiumAccount pa = (PremiumAccount) this.account;
+            pa.removeProducts();
+        }
+
+        this.account = null;
+    }
 }

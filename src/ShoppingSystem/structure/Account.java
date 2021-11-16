@@ -136,5 +136,28 @@ public class Account {
                 "id='" + id + '\'' +
                 '}';
     }
+
+    public void removeCustomer() {
+        this.customer.removeUser();
+        this.customer.removeAccount();
+        this.customer = null;
+    }
+
+    public void removePayments() {
+        for (Payment p:this.payments
+             ) {
+            p.removeAccount();
+            p.removeOrder();
+        }
+        this.payments.clear();
+    }
+
+    public void removeOrders() {
+        for (Order o: this.orders
+             ) {
+            o.removePayment();
+            o.removeLineItems();
+        }
+    }
 }
 
