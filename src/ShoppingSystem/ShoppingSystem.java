@@ -179,6 +179,7 @@ public class ShoppingSystem {
 
         if(currentUser.getId().equals(user_from_id)){
             System.out.println("You cannot order from your own account!");
+            return;
         }
 
         // user to buy the product from
