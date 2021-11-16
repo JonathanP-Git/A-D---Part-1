@@ -12,9 +12,21 @@ public class ShoppingCart {
     public ShoppingCart(Date created, User user) {
         this.created = created;
         this.user = user;
+        this.user.setShoppingCart(this);
         this.lineItems = new ArrayList<>();
         this.id = String.valueOf(this.hashCode()); // override this.id
 
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "id='" + id + '\'' +
+                ", created=" + created +
+                ", user=" + user +
+                ", lineItems=" + lineItems +
+                ", account=" + account +
+                '}';
     }
 
     @Override

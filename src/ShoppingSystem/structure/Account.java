@@ -18,7 +18,6 @@ public class Account {
 
     public Account(String id, String billing_address,Customer customer, ShoppingCart shoppingCart) {
 
-        this.id = id;
         this.id = String.valueOf(this.hashCode()); // override this.id
         this.billing_address = billing_address;
         this.is_closed = false;
@@ -29,6 +28,7 @@ public class Account {
         this.customer = customer;
         this.customer.setAccount(this);
         this.shoppingCart = shoppingCart;
+        this.shoppingCart.setAccount(this);
     }
 
     @Override
@@ -158,6 +158,7 @@ public class Account {
             o.removePayment();
             o.removeLineItems();
         }
+        this.orders.clear();
     }
 }
 

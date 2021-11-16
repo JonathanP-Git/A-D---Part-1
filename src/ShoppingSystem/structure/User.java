@@ -79,9 +79,11 @@ public class User {
     }
 
     public void removeShoppingCart() {
-        this.shoppingCart.removeLineItems();
-        this.shoppingCart.removeAccount();
-        this.shoppingCart = null;
+        if (this.shoppingCart != null) {
+            this.shoppingCart.removeLineItems();
+            this.shoppingCart.removeAccount();
+            this.shoppingCart = null;
+        }
     }
 
     public void removeCustomer() {
