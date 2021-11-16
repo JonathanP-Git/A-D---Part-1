@@ -136,7 +136,7 @@ public class ShoppingSystem {
         Order order = new Order(new Date(), new Address(address), OrderStatus.New,
                 this.currentUser.getCustomer().getAccount());
         this.orders.put(order.getNumber(), order);
-        System.out.println("The order's number is " + order.getNumber());
+        System.out.println("The order's number/id is " + order.getNumber());
     }
 
     public void addProductToOrder(String line) {
@@ -153,7 +153,7 @@ public class ShoppingSystem {
         // user to buy the product from
         User userToBuy = this.users.get(user_from_id);
 
-        if (userToBuy == null){
+        if (userToBuy == null) {
             System.out.println("The given user is not existed");
             return;
         }
@@ -173,7 +173,7 @@ public class ShoppingSystem {
 
         Order order = orders.get(order_id);
 
-        if (order == null){
+        if (order == null) {
             System.out.println("The order " + order_id + " is not existed");
             return;
         }
@@ -232,22 +232,25 @@ public class ShoppingSystem {
         }
 
         ArrayList<Order> currAccOrders = this.currentUser.getCustomer().getAccount().getOrders();
-        if (currAccOrders.size() == 0){
+        if (currAccOrders.size() == 0) {
             System.out.println("The user doesn't have orders");
             return;
         }
 
-        if (currAccOrders.size() > 0){
-            Order order = currAccOrders.get(currAccOrders.size() - 1);
-            System.out.println("Order number: " + order.getNumber());
-            System.out.println("Order date: " + order.getOrdered());
-            System.out.println("Shipping date: " + order.getShipped());
-            System.out.println("Shipping address: " + order.getShippedTo());
-            System.out.println("Order status: " + order.getStatus().toString());
-            System.out.println("Total payment " + order.getTotal());
+        Order order = currAccOrders.get(currAccOrders.size() - 1);
+        System.out.println("Order number: " + order.getNumber());
+        System.out.println("Order date: " + order.getOrdered());
+        System.out.println("Shipping date: " + order.getShipped());
+        System.out.println("Shipping address: " + order.getShippedTo());
+        System.out.println("Order status: " + order.getStatus().toString());
+        System.out.println("Total payment " + order.getTotal());
+        System.out.println("Payments:");
+        for (Payment p : order.getPayments()) {
+            System.out.println(p);
         }
-        else {
-            System.out.println("No orders available for current user");
+        System.out.println("Line items: ");
+        for (LineItem p : order.getLineItems()) {
+            System.out.println(p);
         }
     }
 
@@ -325,7 +328,7 @@ public class ShoppingSystem {
         System.out.println("Customers:");
         System.out.println(this.customers.toString());
         //
-        System.out.println("Orders:");
+        System.out.println("Orders and Lineitems:");
         System.out.println(this.orders.toString());
         //
         System.out.println("Products:");

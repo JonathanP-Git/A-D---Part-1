@@ -152,7 +152,8 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "number='" + number + '\'' +
+                "id='" + id + '\'' +
+                ", lineItems=" + lineItems +
                 '}';
     }
 
