@@ -54,7 +54,6 @@ public class PremiumAccount extends Account {
     }
 
 
-
     public void removeProduct(Product product) {
         this.products.remove(product);
         product.removePa();
@@ -68,7 +67,7 @@ public class PremiumAccount extends Account {
     }
 
     public void removeProducts() {
-        while (this.products.size() >0) {
+        while (this.products.size() > 0) {
             removeProduct(this.products.get(0));
         }
         this.products_quantity_price.clear();
