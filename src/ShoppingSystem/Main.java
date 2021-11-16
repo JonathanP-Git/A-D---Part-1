@@ -104,7 +104,7 @@ public class Main {
                 shoppingSystem.showObjectId(line);
             }
             else{
-                System.out.println("Wrong input, try agian");
+                System.out.println("Wrong input, try again");
             }
             callMenu();
         }
