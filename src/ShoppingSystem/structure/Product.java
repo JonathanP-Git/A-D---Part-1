@@ -101,4 +101,8 @@ public class Product {
         }
         this.lineItems.clear();
     }
+
+    public void removePa() {
+        this.premiumAccount = null;
+    }
 }
