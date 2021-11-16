@@ -75,8 +75,7 @@ public class ShoppingSystem {
         User userToRemove = this.users.get(user_id);
 
         // remove from premiumAccounts ShoppingSystem list
-        this.premiumAccounts.remove(userToRemove.getCustomer().getAccount().getId(),null);
-
+        this.premiumAccounts.remove(userToRemove.getCustomer().getAccount().getId());
         // remove from accounts ShoppingSystem list the user account
         this.accounts.remove(userToRemove.getCustomer().getAccount().getId());
         // remove from customers ShoppingSystem list the user customer
@@ -86,13 +85,12 @@ public class ShoppingSystem {
              ) {
             this.orders.remove(o.getId());
         }
+
         // remove from users ShoppingSystem list
         this.users.remove(user_id);
 
         // remove shopping cart,account,customer,payment,order,lineItem
         userToRemove.removeShoppingCart();
-
-
 
         System.out.println("The user " + user_id + " has been deleted!");
 
@@ -349,8 +347,10 @@ public class ShoppingSystem {
 
     public void showObjectId(String line) {
         String id = line.split(" ")[3];
+        boolean exist = false;
 
         if (accounts.containsKey(id)) {
+            exist = true;
             System.out.println("------ Account ------");
             Account toPrint = accounts.get(id);
             System.out.println(toPrint);
@@ -377,6 +377,7 @@ public class ShoppingSystem {
             }
         }
         if (customers.containsKey(id)) {
+            exist = true;
             System.out.println("------ Customer ------");
             Customer toPrint = customers.get(id);
             System.out.println(toPrint);
@@ -388,6 +389,7 @@ public class ShoppingSystem {
         }
 
         if (users.containsKey(id)) {
+            exist = true;
             System.out.println("------ User ------");
             User toPrint = users.get(id);
             System.out.println(toPrint);
@@ -399,6 +401,7 @@ public class ShoppingSystem {
         }
 
         if (products.containsKey(id)) {
+            exist = true;
             System.out.println("------ Product------");
             Product toPrint = products.get(id);
             System.out.println(toPrint);
@@ -415,6 +418,7 @@ public class ShoppingSystem {
         }
 
         if (suppliers.containsKey(id)) {
+            exist = true;
             System.out.println("------ Supplier------");
             Supplier toPrint = suppliers.get(id);
             System.out.println(toPrint);
@@ -426,6 +430,7 @@ public class ShoppingSystem {
         }
 
         if (orders.containsKey(id)) {
+            exist = true;
             System.out.println("------ Orders------");
             Order toPrint = orders.get(id);
             System.out.println("ID: " + toPrint.getId());
@@ -443,6 +448,9 @@ public class ShoppingSystem {
             for (LineItem p : toPrint.getLineItems()) {
                 System.out.println(p);
             }
+        }
+        if (!exist){
+            System.out.println("The id - " + id + " is not exist");
         }
     }
 }

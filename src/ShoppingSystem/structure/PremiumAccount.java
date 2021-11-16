@@ -72,6 +72,7 @@ public class PremiumAccount extends Account {
         this.products.remove(product);
         for (ProductOfPremium productOfPremium : this.products_quantity_price) {
             if (productOfPremium.getProduct().name.equals(product.getName())) {
+//                productOfPremium.getProduct().deleteProductFromPA();
                 products_quantity_price.remove(productOfPremium);
                 break;
             }
