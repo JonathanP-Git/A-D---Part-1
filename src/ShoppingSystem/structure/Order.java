@@ -48,20 +48,7 @@ public class Order {
         this.account.putOrder(this);
         this.payments = new ArrayList<>();
         this.lineItems = new ArrayList<>();
-        this.id = String.valueOf(this.hashCode()); // override this.id
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Float.compare(order.total, total) == 0 && Objects.equals(id, order.id) && Objects.equals(number, order.number) && Objects.equals(ordered, order.ordered) && Objects.equals(shipped, order.shipped) && Objects.equals(shippedTo, order.shippedTo) && status == order.status && Objects.equals(account, order.account) && Objects.equals(payments, order.payments) && Objects.equals(lineItems, order.lineItems);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(ordered, shippedTo, status, account);
+        this.id = this.number;
     }
 
     public String getNumber() {
