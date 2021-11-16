@@ -117,7 +117,7 @@ public class ShoppingSystem {
                 System.out.println("The password is incorrect");
             }
         } else {
-            System.out.println("User " + user_id + "is not existed");
+            System.out.println("User " + user_id + " is not existed");
         }
     }
 
@@ -163,6 +163,10 @@ public class ShoppingSystem {
         if (currentUser == null) {
             System.out.println("No user is logged in.");
             return;
+        }
+
+        if(currentUser.getId().equals(user_from_id)){
+            System.out.println("You cannot order from your own account!");
         }
 
         // user to buy the product from
