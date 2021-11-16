@@ -301,6 +301,7 @@ public class ShoppingSystem {
         if (this.products.containsKey(product_name)) {
             this.products.get(product_name).deleteProductFromSupplier();
             this.products.get(product_name).deleteProductFromPA();
+            this.products.get(product_name).deleteLineItems();
             this.products.remove(product_name);
 
             System.out.println("Product " + product_name + " has been deleted");
