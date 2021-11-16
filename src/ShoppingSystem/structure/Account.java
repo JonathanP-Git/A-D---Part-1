@@ -22,7 +22,7 @@ public class Account {
         this.billing_address = billing_address;
         this.is_closed = false;
         this.open = new Date();
-        this.balance = 0;
+        this.balance = 100;
         this.payments = new ArrayList<>();
         this.orders = new ArrayList<>();
         this.customer = customer;

@@ -125,7 +125,7 @@ public class Order {
 
     public boolean addLineItem(ProductOfPremium sellerProduct, int userQuantity, User currUser) {
         if(sellerProduct.getQuantity() < userQuantity){
-            System.out.println("The seller do not have such number of "+sellerProduct.getProduct().name);
+            System.out.println("The seller doesn't have such number of "+sellerProduct.getProduct().name);
             return false;
         }
 

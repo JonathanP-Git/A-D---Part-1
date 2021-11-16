@@ -187,7 +187,15 @@ public class ShoppingSystem {
         Scanner Scanner = new Scanner(System.in);  // Create a Scanner object
         System.out.println("How many " + product_name + " do you want to buy?");
         String userQuantity = Scanner.nextLine();
-        order.addTotal(Integer.parseInt(userQuantity)*premiumAccProduct.getPrice());
+        int userMoney = currentUser.getCustomer().getAccount().getBalance();
+        int buySum = Integer.parseInt(userQuantity)*premiumAccProduct.getPrice();
+        if( userMoney < buySum){
+            System.out.println("You have just " + userMoney +" left in your account but it costs " +buySum);
+            return;
+        }
+        order.addTotal(buySum);
+        currentUser.getCustomer().getAccount().setBalance(userMoney-buySum); // decrease from balance
+        userAcc.setBalance(userAcc.getBalance()+buySum); // add money to seller
 
         boolean addedLineItem = order.addLineItem(premiumAccProduct, Integer.parseInt(userQuantity),
                 this.currentUser);
@@ -207,7 +215,7 @@ public class ShoppingSystem {
                 System.out.println("Is that your phone number? " + this.currentUser.getCustomer().getPhone() + " y/n");
                 String userPhoneConfirmation = Scanner.nextLine().toLowerCase();
                 payment = new ImmediatePayment(new Date(),
-                        Integer.parseInt(userQuantity) * premiumAccProduct.getPrice(),
+                        buySum,
                         userDetails, this.currentUser.getCustomer().getAccount(), order,
                         userPhoneConfirmation.equalsIgnoreCase("y"));
             }
@@ -216,7 +224,7 @@ public class ShoppingSystem {
                 String[] userPaymentDate = Scanner.nextLine().split("/");
                 Date paymentDate = new Date(Integer.parseInt(userPaymentDate[2]),
                         Integer.parseInt(userPaymentDate[1]), Integer.parseInt(userPaymentDate[0]));
-                payment = new DelayedPayment(new Date(), Integer.parseInt(userQuantity) * premiumAccProduct.getPrice(),
+                payment = new DelayedPayment(new Date(), buySum,
                         userDetails, this.currentUser.getCustomer().getAccount(), order, paymentDate);
             }
             default -> System.out.println("Payment method not recognized! Please try again.");
@@ -227,6 +235,7 @@ public class ShoppingSystem {
         }
 
         this.currentUser.getCustomer().getAccount().addPayment(payment);
+
 
     }
 
