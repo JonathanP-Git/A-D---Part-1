@@ -57,7 +57,7 @@ public class ShoppingSystem {
         }
         //
         shoppingCart.setAccount(account);
-        user.setShoppingCart(shoppingCart);
+
         customer.setAccount(account);
         this.users.put(user.getId(), user);
         this.customers.put(customer.getId(), customer);
