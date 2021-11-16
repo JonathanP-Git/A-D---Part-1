@@ -236,13 +236,19 @@ public class ShoppingSystem {
             System.out.println("The user doesn't have orders");
             return;
         }
-        Order order = currAccOrders.get(currAccOrders.size() - 1);
-        System.out.println("Order number: " + order.getNumber());
-        System.out.println("Order date: " + order.getOrdered());
-        System.out.println("Shipping date: " + order.getShipped());
-        System.out.println("Shipping address: " + order.getShippedTo());
-        System.out.println("Order status: " + order.getStatus().toString());
-        System.out.println("Total payment " + order.getTotal());
+
+        if (currAccOrders.size() > 0){
+            Order order = currAccOrders.get(currAccOrders.size() - 1);
+            System.out.println("Order number: " + order.getNumber());
+            System.out.println("Order date: " + order.getOrdered());
+            System.out.println("Shipping date: " + order.getShipped());
+            System.out.println("Shipping address: " + order.getShippedTo());
+            System.out.println("Order status: " + order.getStatus().toString());
+            System.out.println("Total payment " + order.getTotal());
+        }
+        else {
+            System.out.println("No orders available for current user");
+        }
     }
 
 
@@ -257,6 +263,10 @@ public class ShoppingSystem {
         }
         if(!(currentUser.getCustomer().getAccount() instanceof PremiumAccount)){
             System.out.println("The user doesn't have premium account");
+            return;
+        }
+        if (!(premiumAccounts.containsKey(currentUser.getCustomer().getAccount().getId()))) {
+            System.out.println("This user is not a premium account.");
             return;
         }
         if (!(products.containsKey(product_name))) {
