@@ -9,13 +9,6 @@ public class User {
     ShoppingCart shoppingCart;
     Customer customer;
 
-//    public User(String id, String password, UserState state, ShoppingCart shoppingCart, Customer customer) {
-//        this.id = id;
-//        this.password = password;
-//        this.state = state;
-//        this.shoppingCart = shoppingCart;
-//        this.customer = customer;
-//    }
 
     public User(String id, String password, UserState state,Customer customer) {
         this.id = id;

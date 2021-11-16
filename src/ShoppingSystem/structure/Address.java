@@ -5,18 +5,12 @@ import java.util.Objects;
 public class Address {
     String address;
     String id;
-//    String state;
-//    String street;
-//    String city;
-//    int number;
+
 
     public Address(String address) {
         this.address = address;
         this.id = String.valueOf(this.hashCode()); // override this.id
-//        this.state = state;
-//        this.street = street;
-//        this.city = city;
-//        this.number = number;
+
     }
 
     @Override

@@ -9,18 +9,6 @@ public class Product {
     Supplier supplier;
     PremiumAccount premiumAccount;
 
-
-
-//    public Product(String id, String name, Supplier supplier,
-//                   PremiumAccount premiumAccount) {
-//        this.id = id;
-//        this.name = name;
-//        this.lineItems = new ArrayList<>();
-//        this.supplier = supplier;
-//        this.premiumAccount = premiumAccount;
-//
-//    }
-
     public Product(String id, String name, Supplier supplier) {
         this.id = id;
         this.name = name;
