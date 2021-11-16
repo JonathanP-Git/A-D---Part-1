@@ -44,4 +44,12 @@ public class LineItem {
     public int hashCode() {
         return Objects.hash(quantity, price, shoppingCart, order, product);
     }
+
+    public void removeFromOrder() {
+        this.order.lineItems.remove(this);
+    }
+
+    public void removeFromShoppingCart() {
+        this.shoppingCart.lineItems.remove(this);
+    }
 }

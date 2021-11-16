@@ -92,4 +92,11 @@ public class Product {
                 '}';
     }
 
+    public void deleteLineItems() {
+        for(LineItem li: this.lineItems){
+            li.removeFromOrder();
+            li.removeFromShoppingCart();
+        }
+        this.lineItems.clear();
+    }
 }
