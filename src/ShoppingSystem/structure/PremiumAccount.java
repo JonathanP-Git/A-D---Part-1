@@ -54,26 +54,12 @@ public class PremiumAccount extends Account {
     }
 
 
-    public void removeConnections() {
-        for (Product p : this.products
-        ) {
-            p.setPremiumAccount(null);
-        }
-
-        for (ProductOfPremium pop : this.products_quantity_price) {
-            pop.removeConnections();
-        }
-
-        this.products.clear();
-        this.products_quantity_price.clear();
-    }
 
     public void removeProduct(Product product) {
         this.products.remove(product);
         product.removePa();
         for (ProductOfPremium productOfPremium : this.products_quantity_price) {
             if (productOfPremium.getProduct().name.equals(product.getName())) {
-//                productOfPremium.getProduct().deleteProductFromPA();
                 products_quantity_price.remove(productOfPremium);
                 break;
             }
@@ -82,7 +68,7 @@ public class PremiumAccount extends Account {
     }
 
     public void removeProducts() {
-        while (this.products.size() >0){
+        while (this.products.size() >0) {
             removeProduct(this.products.get(0));
         }
         this.products_quantity_price.clear();
